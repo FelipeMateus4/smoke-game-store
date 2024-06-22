@@ -1,0 +1,48 @@
+import sequelize from "../connections/sequelize";
+import { DataTypes, Model } from "sequelize";
+
+class Game extends Model {
+    declare title: string;
+    declare price: number;
+    declare tags: string[];
+    declare description: string;
+    declare platform: string[];
+    declare url: string;
+}
+
+Game.init(
+    {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        price: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        tags: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        platform: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
+        },
+        url: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+    },
+    {
+        sequelize,
+        modelName: "Game",
+        tableName: "games",
+        schema: "public",
+    }
+);
+
+export { Game as GameModel };
