@@ -1,4 +1,4 @@
-import sequelize from "../connections/sequelize";
+import { sequelize } from "../connections/sequelize";
 import { DataTypes, Model } from "sequelize";
 
 class Game extends Model {
@@ -14,6 +14,7 @@ Game.init(
     {
         title: {
             type: DataTypes.STRING,
+            unique: true,
             allowNull: false,
         },
         price: {

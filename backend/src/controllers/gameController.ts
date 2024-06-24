@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
-import { GameModel } from "../model/gameModel";
 import { GameType } from "../types/game";
+import gameServices from "../services/gameServices";
 
 const router = Router();
 router.post("/game/register", async (req: Request, res: Response) => {
-    const game: GameType = {
+    const game = {
         title: req.body.title,
         price: req.body.price,
         tags: req.body.tags,
@@ -12,12 +12,66 @@ router.post("/game/register", async (req: Request, res: Response) => {
         platform: req.body.platform,
         url: req.body.url,
     };
-    await GameModel.sync();
+
+    const gameValidation = GameType.safeParse(game);
+    if (!gameValidation.success) {
+        return res.status(400).send({
+            message: "Invalid game data",
+            error: gameValidation.error,
+        });
+    }
+
     try {
-        await GameModel.create(game);
-        res.status(201).send("Game created successfully");
-    } catch (error) {
-        res.status(500).send("Internal server error");
+        const result = await gameServices.createGame(gameValidation.data);
+        res.status(201).send({
+            message: "Game registered successfully",
+            game: result.title,
+        });
+    } catch (err) {
+        if (err instanceof Error) {
+            if (err.name === "SequelizeUniqueConstraintError") {
+                res.status(400).send({
+                    message: "Internal server error",
+                    error: new Error("Game already registered").message,
+                });
+            } else {
+                res.status(500).send({
+                    message: "Unknown error",
+                    error: err.message,
+                });
+            }
+        } else {
+            res.status(500).send({
+                message: "Internal server error",
+                error: err,
+            });
+        }
+    }
+});
+
+router.delete("/game/delete", async (req: Request, res: Response) => {
+    const title = req.body.title;
+
+    try {
+        const result = await gameServices.deleteGame(title);
+        res.status(200).send({
+            message: result,
+            game: title,
+        });
+    } catch (err) {
+        if (err instanceof Error) {
+            if (err.message === "Game not found!") {
+                res.status(404).send({
+                    message: "Game not found",
+                    error: err.message,
+                });
+            } else {
+                res.status(500).send({
+                    message: "Internal server error",
+                    error: err.message,
+                });
+            }
+        }
     }
 });
 
