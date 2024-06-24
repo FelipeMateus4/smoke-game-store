@@ -10,4 +10,10 @@ const createUser = async (user: UserType) => {
     }
 };
 
+const findByEmail = async (email: string) => {
+    try {
+        const result = await game;
+    } catch (error) {}
+};
+
 export default { createUser };

@@ -11,4 +11,14 @@ const createUser = async (user: UserType) => {
     }
 };
 
-export default { createUser };
+const findEmail = async (email: string) => {
+    try {
+        const operationResult = await UserModel.findOne({
+            where: { email: email },
+        });
+        return operationResult;
+    } catch (error) {
+        throw error;
+    }
+};
+export default { createUser, findEmail };
