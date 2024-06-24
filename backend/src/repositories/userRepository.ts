@@ -16,6 +16,11 @@ const findEmail = async (email: string) => {
         const operationResult = await UserModel.findOne({
             where: { email: email },
         });
+        if (!operationResult) {
+            throw new Error("User not found");
+        }
+        operationResult.verified = true;
+        operationResult.save();
         return operationResult;
     } catch (error) {
         throw error;

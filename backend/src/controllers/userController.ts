@@ -1,6 +1,10 @@
 import { Router, Request, Response } from "express";
 import { UserType } from "../types/user";
 import userService from "../services/userService";
+import jwt from "jsonwebtoken";
+import { config } from "dotenv";
+
+config();
 
 const router = Router();
 router.post("/register", async (req: Request, res: Response) => {
@@ -48,13 +52,39 @@ router.post("/register", async (req: Request, res: Response) => {
     }
 });
 
-router.patch("/register/authenticate", async (req: Request, res: Response) => {
+router.get("/register/authenticate", async (req: Request, res: Response) => {
     const token = req.query.token;
-
     if (!token) {
         return res
             .status(400)
             .send({ message: "error token not found,try again later" });
+    }
+    try {
+        const decode: any = jwt.verify(
+            token as string,
+            process.env.JWT_SECRET as string
+        );
+        const user = await userService.findByEmail(decode.email);
+        res.status(201).send({
+            message: "o usario esta verificado",
+            user: user.username,
+        });
+    } catch (err) {
+        if (err instanceof Error) {
+            if (err.message === "User not found") {
+                res.status(404).send("o usuario nao foi encontrado");
+            } else {
+                res.status(500).send({
+                    message: "Unknown error",
+                    error: err.message,
+                });
+            }
+        } else {
+            res.status(500).send({
+                message: "internal server error",
+                error: err,
+            });
+        }
     }
 });
 export { router as userRouter };

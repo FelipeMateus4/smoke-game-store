@@ -39,7 +39,7 @@ Game.init(
             allowNull: true,
         },
         verify: {
-            type: DataTypes.STRING,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
         },

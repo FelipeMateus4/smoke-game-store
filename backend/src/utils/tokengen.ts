@@ -3,9 +3,9 @@ import dotenv, { config } from "dotenv";
 
 config();
 
-export const generateToken = (id: string): string => {
-    return jwt.sign({ id }, process.env.JWT_SECRET!, {
+export const generateToken = (email: string): string => {
+    const secret = process.env.JWT_SECRET! || "";
+    return jwt.sign({ email }, secret, {
         expiresIn: "1h",
-        algorithm: "RS256",
     });
 };

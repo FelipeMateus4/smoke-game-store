@@ -23,4 +23,4 @@ const findByEmail = async (email: string) => {
     }
 };
 
-export default { createUser };
+export default { createUser, findByEmail };

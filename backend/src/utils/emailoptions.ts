@@ -6,7 +6,7 @@ config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 export const sendTokenEmail = async (email: any, token: any) => {
-    const confirmationUrl = `http://localhost:3000//register/authenticate?token=${token}`;
+    const confirmationUrl = `http://localhost:3000/account/register/authenticate?token=${token}`;
     const msg = {
         to: email,
         from: "dropzin01@gmail.com",
