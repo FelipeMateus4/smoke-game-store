@@ -1,8 +1,6 @@
 import { Router, Request, Response } from "express";
 import { UserType } from "../types/user";
-import { sendTokenEmail } from "../utils/emailoptions";
 import userService from "../services/userService";
-import { generateToken } from "../utils/tokengen";
 
 const router = Router();
 router.post("/register", async (req: Request, res: Response) => {
@@ -24,8 +22,6 @@ router.post("/register", async (req: Request, res: Response) => {
 
     try {
         const result = await userService.createUser(userValidation.data);
-        const token = generateToken(userValidation.data.email);
-        await sendTokenEmail(userValidation.data.email, token);
         res.status(201).send({
             message: "User registered successfully",
             user: result.username,
