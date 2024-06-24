@@ -3,7 +3,7 @@ import { GameType } from "../types/game";
 import gameServices from "../services/gameServices";
 
 const router = Router();
-router.post("/game/register", async (req: Request, res: Response) => {
+router.post("/item/register", async (req: Request, res: Response) => {
     const game = {
         title: req.body.title,
         price: req.body.price,
@@ -49,7 +49,7 @@ router.post("/game/register", async (req: Request, res: Response) => {
     }
 });
 
-router.delete("/game/delete", async (req: Request, res: Response) => {
+router.delete("/item/delete", async (req: Request, res: Response) => {
     const title = req.body.title;
 
     try {
