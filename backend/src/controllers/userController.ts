@@ -52,5 +52,13 @@ router.post("/register", async (req: Request, res: Response) => {
     }
 });
 
-router.patch("");
+router.patch("/register/authenticate", async (req: Request, res: Response) => {
+    const token = req.query.token;
+
+    if (!token) {
+        return res
+            .status(400)
+            .send({ message: "error token not found,try again later" });
+    }
+});
 export { router as userRouter };

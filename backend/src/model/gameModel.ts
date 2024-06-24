@@ -8,6 +8,7 @@ class Game extends Model {
     declare description: string;
     declare platform: string[];
     declare url: string;
+    declare verify: boolean;
 }
 
 Game.init(
@@ -36,6 +37,11 @@ Game.init(
         url: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        verify: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: false,
         },
     },
     {
