@@ -3,6 +3,7 @@ import { UserType } from "../types/user";
 import userService from "../services/userService";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
+import passport from "../utils/passportoptions";
 
 config();
 
@@ -61,6 +62,15 @@ router.get(
             next(err);
         }
     }
+);
+
+router.post(
+    "/login",
+    passport.authenticate("local", {
+        successRedirect: "/item/register",
+        failureRedirect: "/login",
+        failureFlash: true,
+    })
 );
 
 export { router as userRouter };
