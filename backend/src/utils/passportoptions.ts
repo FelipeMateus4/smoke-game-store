@@ -5,18 +5,17 @@ import { UserModel } from "../model/userModel";
 passport.use(
     new LocalStrategy(async (username, password, done) => {
         try {
-            const user = await UserModel.findOne({
-                where: { username: username },
-            });
-            if (!user) {
-                return done(null, false, { message: "Incorrect username." });
+            const user = await UserModel.findOne({ where: { username } });
+
+            if (!user || !user.comparePassword(password)) {
+                return done(null, false, {
+                    message: "Invalid username or password",
+                });
             }
-            if (!(await user.comparePassword(password))) {
-                return done(null, false, { message: "Incorrect password." });
-            }
+
             return done(null, user);
-        } catch (error) {
-            return done(error);
+        } catch (err) {
+            return done(err);
         }
     })
 );
@@ -25,9 +24,9 @@ passport.serializeUser((user: any, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser(async (email, done) => {
+passport.deserializeUser(async (id, done) => {
     try {
-        const user = await UserModel.findOne({ where: { id: email } });
+        const user = await UserModel.findOne({ where: { id } });
         done(null, user);
     } catch (error) {
         done(error);

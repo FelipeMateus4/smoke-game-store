@@ -4,7 +4,7 @@ import gameServices from "../services/gameServices";
 
 const router = Router();
 router.post(
-    "/item/register",
+    "/register",
     async (req: Request, res: Response, next: NextFunction) => {
         const game: GameType = {
             title: req.body.title,
@@ -36,7 +36,7 @@ router.post(
 );
 
 router.delete(
-    "/item/delete",
+    "/delete",
     async (req: Request, res: Response, next: NextFunction) => {
         const title = req.body.title;
 
