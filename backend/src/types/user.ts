@@ -5,7 +5,7 @@ const User = z.object({
     username: z.string(),
     password: z.string(),
     email: z.string(),
-    verify: z.boolean().default(false),
+    verified: z.boolean().default(false),
 });
 
 type User = z.infer<typeof User>;
