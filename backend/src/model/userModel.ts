@@ -26,6 +26,8 @@ class User extends Model {
     declare password: string;
     declare email: string;
     declare verified: boolean;
+    declare googleId: string | null;
+    declare provider: string | null;
 
     public async comparePassword(enteredPassword: string): Promise<boolean> {
         return await bcrypt.compare(enteredPassword, this.password);
@@ -46,14 +48,17 @@ User.init(
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: {
                     args: [6, 30],
                     msg: "A senha deve ter entre 8 e 30 caracteres",
                 },
                 isPasswordValid(value: string) {
-                    if (!passwordSchema.validate(value)) {
+                    if (
+                        this.googleId === null &&
+                        !passwordSchema.validate(value)
+                    ) {
                         throw new Error(
                             "A senha deve conter no mínimo 8 caracteres, 1 letra maiúscula e 1 símbolo especial"
                         );
@@ -76,6 +81,14 @@ User.init(
             allowNull: false,
             defaultValue: false,
         },
+        googleId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        provider: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     },
     {
         sequelize,
@@ -84,10 +97,12 @@ User.init(
         schema: "public",
         hooks: {
             beforeCreate: async (user: User) => {
-                user.password = await bcrypt.hash(user.password, 10);
+                if (user.password)
+                    user.password = await bcrypt.hash(user.password, 10);
             },
             beforeUpdate: async (user: User) => {
-                user.password = await bcrypt.hash(user.password, 10);
+                if (user.password)
+                    user.password = await bcrypt.hash(user.password, 10);
             },
         },
     }

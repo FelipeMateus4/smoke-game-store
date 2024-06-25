@@ -1,58 +1,53 @@
 import passport from "passport";
-import { Strategy as OAuth2Strategy } from "passport-oauth2";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { UserModel } from "../model/userModel";
+import { config } from "dotenv";
 
-// Estruturação da estratégia OAuth 2.0
+config();
+
 passport.use(
-    new OAuth2Strategy(
+    new GoogleStrategy(
         {
-            authorizationURL: "https://accounts.google.com/o/oauth2/auth",
-            tokenURL: "https://oauth2.googleapis.com/token",
-            clientID: "YOUR_GOOGLE_CLIENT_ID",
-            clientSecret: "YOUR_GOOGLE_CLIENT_SECRET",
-            callbackURL: "http://localhost:3000/auth/callback",
-            scope: ["profile", "email"], // Solicitando escopos de perfil e email
+            clientID:
+                "764439856764-b3s3dtd6vqt9mqlj8nbbefeentpje6qi.apps.googleusercontent.com",
+            clientSecret: "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",
+            callbackURL: "http://localhost:3000/account/auth/google/callback",
         },
-        async function (
-            accessToken: any,
-            refreshToken: any,
-            profile: any,
-            done: any
-        ) {
+        async (accessToken, refreshToken, profile, done) => {
             try {
-                // O Google retorna o perfil no formato a seguir
-                const googleProfile = profile._json;
-
-                const user = await UserModel.findOne({
-                    where: { oauthId: googleProfile.email },
+                let user = await UserModel.findOne({
+                    where: { googleId: profile.id },
                 });
 
                 if (!user) {
-                    const newUser = await UserModel.create({
-                        username: googleProfile.name,
-                        email: googleProfile.email,
-                        oauthId: googleProfile.password,
+                    user = await UserModel.create({
+                        username: profile.displayName,
+                        email: profile.emails![0].value,
+                        googleId: profile.id,
+                        provider: "google",
+                        verified: true,
                     });
-                    return done(null, newUser);
                 }
+
                 return done(null, user);
-            } catch (error) {
-                return done(error);
+            } catch (err) {
+                return done(err);
             }
         }
     )
 );
 
-// Serialização e desserialização do usuário
 passport.serializeUser((user: any, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id: any, done) => {
     try {
-        const user = await UserModel.findOne({ where: { id } });
+        const user = await UserModel.findByPk(id);
         done(null, user);
-    } catch (error) {
-        done(error);
+    } catch (err) {
+        done(err, null);
     }
 });
+
+export { passport as passportGoogle };

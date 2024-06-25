@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import passport from "../utils/passportoptions";
 import { UserModel } from "../model/userModel";
 import { ensureAuthenticated } from "../middlewares/protectedRoute";
+import { passportGoogle } from "../utils/passportoauth2";
 
 config();
 
@@ -94,6 +95,10 @@ router.get(
             </div>
             <div class="form-group">
                 <p>Don't have an account? <a href="/account/register">Register here</a></p>
+            </div>
+            <div class="form-group">
+                <p>Or login with:</p>
+                <a href="/account/auth/google">Google</a>
             </div>
         </form>
     </div>
@@ -197,5 +202,20 @@ router.post("/logout", function (req, res, next) {
         res.redirect("/account/login");
     });
 });
+
+router.get(
+    "/auth/google",
+    passportGoogle.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+    "/auth/google/callback",
+    passportGoogle.authenticate("google", {
+        failureRedirect: "/account/login",
+    }),
+    (req: Request, res: Response) => {
+        res.redirect("/account/profile");
+    }
+);
 
 export { router as userRouter };
