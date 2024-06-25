@@ -5,8 +5,6 @@ function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
         return next();
     }
 
-    return res.status(401).send({
-        message: "Unauthorized",
-    });
+    return res.status(401).redirect("/account/login");
 }
 export { ensureAuthenticated };
