@@ -9,6 +9,7 @@ import { ensureAuthenticated } from "../middlewares/protectedRoute";
 config();
 
 const router = Router();
+
 router.post(
     "/register",
     async (req: Request, res: Response, next: NextFunction) => {
@@ -68,7 +69,37 @@ router.get(
 router.get(
     "/login",
     async (req: Request, res: Response, next: NextFunction) => {
-        res.send("Login page");
+        res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/account/login" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+            <div class="form-group">
+                <p>Don't have an account? <a href="/account/register">Register here</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+`);
     }
 );
 
@@ -78,7 +109,7 @@ router.get(
     async (req: Request, res: Response, next: NextFunction) => {
         // Verifica se req.user está definido e se tem a propriedade username
         if (!req.user || !("username" in req.user)) {
-            return res.redirect("/login"); // Redireciona para o login se o usuário não estiver autenticado
+            return res.redirect("/account/login"); // Redireciona para o login se o usuário não estiver autenticado
         }
 
         // Tipagem segura: aqui estamos assumindo que req.user é do tipo User
@@ -139,7 +170,9 @@ router.get(
                 <h1>Perfil do Usuário</h1>
                 <p>Olá, <strong>${username}</strong>!</p>
                 <p>Você está logado com sucesso.</p>
-                <a href="/account/login" class="logout-btn">Logout</a>
+                <form action="/account/logout" method="post">
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
             </div>
         </body>
         </html>
@@ -155,5 +188,14 @@ router.post(
         failureFlash: true,
     })
 );
+
+router.post("/logout", function (req, res, next) {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/account/login");
+    });
+});
 
 export { router as userRouter };

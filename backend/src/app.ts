@@ -6,7 +6,6 @@ import passport from "passport";
 import flash from "express-flash";
 import { routes } from "./routes/routes";
 import { authRouter } from "./routes/authLogin";
-import { ensureAuthenticated } from "./middlewares/protectedRoute";
 
 const app = express();
 
@@ -31,17 +30,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Middleware para mensagens flash
-app.use(flash());
+// app.use(flash());
 
 // Rotas
 app.use(routes);
 app.use(authRouter);
 
-// Manipulador de erro para mensagens flash
+//Manipulador de erro para mensagens flash
 // app.use((err: any, req: Request, res: Response, next: Function) => {
 //     if (err) {
 //         req.flash("error", err.message); // Enviar mensagem flash de erro
-//         res.redirect("/login"); // Redirecionar de volta para a página de login
+//         res.redirect("/account/login"); // Redirecionar de volta para a página de login
 //     }
 // });
 

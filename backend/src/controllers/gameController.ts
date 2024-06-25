@@ -3,6 +3,53 @@ import { GameType } from "../types/game";
 import gameServices from "../services/gameServices";
 
 const router = Router();
+
+router.get("/register", async (req: Request, res: Response) => {
+    res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Game</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register Game</h2>
+        <form action="/account/register" method="post">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required step="0.01" min="0">
+            </div>
+            <div class="form-group">
+                <label for="tags">Tags (comma separated):</label>
+                <input type="text" id="tags" name="tags" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="platform">Platform:</label>
+                <input type="text" id="platform" name="platform" required>
+            </div>
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="url" id="url" name="url" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Register Game</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>`);
+});
+
 router.post(
     "/register",
     async (req: Request, res: Response, next: NextFunction) => {
