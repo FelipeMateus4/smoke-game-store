@@ -70,6 +70,12 @@ router.get(
 router.get(
     "/login",
     async (req: Request, res: Response, next: NextFunction) => {
+        const errorMessages: any = req.flash("error"); // Certifique-se de que está tipado corretamente
+        const errorMessageHtml =
+            errorMessages.length > 0
+                ? `<div class="error">${errorMessages.join("<br>")}</div>`
+                : "";
+
         res.send(`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,6 +87,7 @@ router.get(
 <body>
     <div class="login-container">
         <h2>Login</h2>
+        ${errorMessageHtml}
         <form action="/account/login" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>

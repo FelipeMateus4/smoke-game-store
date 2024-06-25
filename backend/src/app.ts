@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Middleware para mensagens flash
-// app.use(flash());
+app.use(flash());
 
 // Rotas
 app.use(routes);
