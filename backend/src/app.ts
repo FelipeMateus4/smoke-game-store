@@ -37,16 +37,16 @@ app.use(routes);
 app.use(authRouter);
 
 //Manipulador de erro para mensagens flash
-// app.use((err: any, req: Request, res: Response, next: Function) => {
-//     if (err) {
-//         req.flash("error", err.message); // Enviar mensagem flash de erro
-//         res.redirect("/account/login"); // Redirecionar de volta para a página de login
-//     }
-// });
+app.use((err: any, req: Request, res: Response, next: Function) => {
+    if (err) {
+        req.flash("error", err.message); // Enviar mensagem flash de erro
+        res.redirect("/account/login"); // Redirecionar de volta para a página de login
+    }
+});
 
-// // Rota de erro para lidar com rotas inexistentes
-// app.use((req: Request, res: Response) => {
-//     res.status(404).send("Rota não encontrada!");
-// });
+// Rota de erro para lidar com rotas inexistentes
+app.use((req: Request, res: Response) => {
+    res.status(404).send("Rota não encontrada!");
+});
 
 export default app;
