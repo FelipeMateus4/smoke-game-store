@@ -7,8 +7,7 @@ class Game extends Model {
     declare tags: string[];
     declare description: string;
     declare platform: string[];
-    declare url: string;
-    declare verify: boolean;
+    declare url: string | null;
 }
 
 Game.init(
@@ -95,11 +94,6 @@ Game.init(
                     msg: "A URL deve ser válida",
                 },
             },
-        },
-        verify: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
         },
     },
     {
