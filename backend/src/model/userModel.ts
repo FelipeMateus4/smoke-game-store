@@ -52,15 +52,12 @@ User.init(
             validate: {
                 len: {
                     args: [6, 30],
-                    msg: "A senha deve ter entre 8 e 30 caracteres",
+                    msg: "A senha deve ter entre 6 e 30 caracteres",
                 },
                 isPasswordValid(value: string) {
-                    if (
-                        this.googleId === null &&
-                        !passwordSchema.validate(value)
-                    ) {
+                    if (!this.provider && !passwordSchema.validate(value)) {
                         throw new Error(
-                            "A senha deve conter no mínimo 8 caracteres, 1 letra maiúscula e 1 símbolo especial"
+                            "A senha deve ter pelo menos 6 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número e 1 símbolo"
                         );
                     }
                 },
@@ -101,7 +98,7 @@ User.init(
                     user.password = await bcrypt.hash(user.password, 10);
             },
             beforeUpdate: async (user: User) => {
-                if (user.password)
+                if (user.changed("password") && user.password)
                     user.password = await bcrypt.hash(user.password, 10);
             },
         },
