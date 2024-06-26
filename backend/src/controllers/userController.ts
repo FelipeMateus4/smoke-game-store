@@ -9,6 +9,7 @@ import { passportGoogle } from "../utils/passportoauth2";
 import { authenticateToken } from "../utils/tokengen";
 import speakeasy from "speakeasy";
 import { UserType } from "../types/user";
+import { where } from "sequelize";
 
 config();
 
@@ -214,6 +215,30 @@ router.post("/logout", function (req, res, next) {
         res.redirect("/account/login");
     });
 });
+
+router.post("/verify", ensureAuthenticated, async (req, res) => {
+    const { code } = req.body;
+    const user: any = req.user;
+    if (!user) {
+        res.send("aabababa");
+    }
+    const secret: string = user.secret;
+    console.log(secret);
+    const verified = speakeasy.totp.verify({
+        secret: secret,
+        encoding: "base32",
+        token: code,
+        window: 2, // Permite uma janela de 1 intervalo (por exemplo, 30 segundos) para contornar pequenos atrasos
+    });
+
+    if (verified) {
+        res.redirect("/account/profile");
+    } else {
+        return res
+            .status(401)
+            .send({ message: "Código de verificação inválido ou expirado" });
+    }
+});
 router.get("/verify", (req: Request, res: Response) => {
     res.send(`<!-- views/verify.ejs -->
 <!DOCTYPE html>
@@ -223,7 +248,7 @@ router.get("/verify", (req: Request, res: Response) => {
 </head>
 <body>
     <h1>Insira o código de verificação enviado para o seu e-mail</h1>
-    <form action="/verify" method="post">
+    <form action="/account/verify" method="post">
         <input type="text" name="code" placeholder="Código de verificação" required>
         <button type="submit">Verificar</button>
     </form>

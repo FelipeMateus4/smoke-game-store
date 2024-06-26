@@ -1,6 +1,8 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { UserModel } from "../model/userModel";
+import { sendTokenEmailLogin } from "./emailoptions";
+import { authenticateToken } from "./tokengen";
 
 passport.use(
     new LocalStrategy(async (username, password, done) => {
@@ -14,6 +16,10 @@ passport.use(
             if (!(await user.comparePassword(password))) {
                 return done(null, false, { message: "Incorrect password." });
             }
+            const token = authenticateToken(user.secret);
+
+            sendTokenEmailLogin(user.email, token);
+            console.log(token);
             return done(null, user);
         } catch (error) {
             return done(error);
