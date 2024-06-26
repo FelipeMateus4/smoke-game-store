@@ -11,7 +11,7 @@ export const generateToken = (email: string): string => {
     });
 };
 
-export const authenticateToken = (secret: any) => {
+export const authenticateToken = (secret: string) => {
     const token = speakeasy.totp({
         secret: secret,
         encoding: "base32",
