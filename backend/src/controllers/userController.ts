@@ -6,6 +6,9 @@ import passport from "../utils/passportoptions";
 import { UserModel } from "../model/userModel";
 import { ensureAuthenticated } from "../middlewares/protectedRoute";
 import { passportGoogle } from "../utils/passportoauth2";
+import { authenticateToken } from "../utils/tokengen";
+import speakeasy from "speakeasy";
+import { UserType } from "../types/user";
 
 config();
 
@@ -14,11 +17,13 @@ const router = Router();
 router.post(
     "/register",
     async (req: Request, res: Response, next: NextFunction) => {
-        const user = {
+        const secret = speakeasy.generateSecret({ length: 20 });
+        const user: UserType = {
             username: req.body.username,
             password: req.body.password,
             email: req.body.email,
             verified: false,
+            secret: secret.base32,
         };
 
         //const userValidation = UserType.safeParse(user);
@@ -195,7 +200,7 @@ router.get(
 router.post(
     "/login",
     passport.authenticate("local", {
-        successRedirect: "/account/profile",
+        successRedirect: "/account/verify",
         failureRedirect: "/account/login",
         failureFlash: true,
     })
@@ -208,6 +213,26 @@ router.post("/logout", function (req, res, next) {
         }
         res.redirect("/account/login");
     });
+});
+router.get("/verify", (req: Request, res: Response) => {
+    res.send(`<!-- views/verify.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificação de Código</title>
+</head>
+<body>
+    <h1>Insira o código de verificação enviado para o seu e-mail</h1>
+    <form action="/verify" method="post">
+        <input type="text" name="code" placeholder="Código de verificação" required>
+        <button type="submit">Verificar</button>
+    </form>
+    <% if (messages.error) { %>
+        <p><%= messages.error %></p>
+    <% } %>
+</body>
+</html>)
+}`);
 });
 
 router.get(
