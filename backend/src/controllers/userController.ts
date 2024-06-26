@@ -223,7 +223,6 @@ router.post("/verify", ensureAuthenticated, async (req, res) => {
         res.send("aabababa");
     }
     const secret: string = user.secret;
-    console.log(secret);
     const verified = speakeasy.totp.verify({
         secret: secret,
         encoding: "base32",

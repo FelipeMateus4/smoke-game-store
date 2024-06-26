@@ -19,7 +19,6 @@ passport.use(
             const token = authenticateToken(user.secret);
 
             sendTokenEmailLogin(user.email, token);
-            console.log(token);
             return done(null, user);
         } catch (error) {
             return done(error);
