@@ -8,6 +8,7 @@ const User = z.object({
     verified: z.boolean().default(false),
     secret: z.string().optional(),
     securityState: z.string(),
+    allowsession: z.boolean().default(false),
 });
 
 type User = z.infer<typeof User>;

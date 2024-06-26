@@ -25,6 +25,7 @@ router.post(
             verified: false,
             secret: secret.base32,
             securityState: "none",
+            allowsession: false,
         };
 
         //const userValidation = UserType.safeParse(user);
@@ -210,9 +211,9 @@ router.post(
 
 router.post("/logout", function (req, res, next) {
     const user: any = req.user;
-    if (user.verified) {
+    if (user.allowsession) {
         UserModel.update(
-            { verified: false }, // Os atributos que você quer atualizar
+            { allowsession: false }, // Os atributos que você quer atualizar
             {
                 where: { email: user.email }, // A condição para encontrar o usuário
             }
@@ -223,7 +224,7 @@ router.post("/logout", function (req, res, next) {
         if (err) {
             return next(err);
         }
-        res.redirect("/account/login");
+        return res.redirect("/account/login");
     });
 });
 
@@ -244,7 +245,7 @@ router.post("/verify", ensureAuthenticated, async (req, res) => {
 
     if (verified) {
         UserModel.update(
-            { verified: true }, // Os atributos que você quer atualizar
+            { allowsession: true }, // Os atributos que você quer atualizar
             {
                 where: { email: user.email }, // A condição para encontrar o usuário
             }
@@ -263,7 +264,7 @@ router.get("/verify", ensureAuthenticated, (req: Request, res: Response) => {
     if (
         user.securityState === "none" ||
         user.securityState === "google-security" ||
-        user.verified
+        user.allowsession
     ) {
         return res.redirect("/account/profile");
     }

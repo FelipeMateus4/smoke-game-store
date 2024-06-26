@@ -30,6 +30,7 @@ class User extends Model {
     declare provider: string | null;
     declare secret: string;
     declare securityState: string;
+    declare allowsession: boolean;
 
     public async comparePassword(enteredPassword: string): Promise<boolean> {
         return await bcrypt.compare(enteredPassword, this.password);
@@ -94,6 +95,10 @@ User.init(
         },
         securityState: {
             type: DataTypes.STRING,
+            allowNull: false,
+        },
+        allowsession: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         },
     },

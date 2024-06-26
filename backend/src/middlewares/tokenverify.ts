@@ -9,7 +9,7 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
     if (
         user.securityState === "none" ||
         user.securityState === "google-security" ||
-        user.verified
+        user.allowsession
     ) {
         return next();
     }
