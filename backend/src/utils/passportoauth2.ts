@@ -26,6 +26,7 @@ passport.use(
                         googleId: profile.id,
                         provider: "google",
                         verified: true,
+                        securityState: "google-security",
                     });
                 }
 

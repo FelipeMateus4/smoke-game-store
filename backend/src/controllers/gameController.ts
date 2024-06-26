@@ -1,10 +1,11 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { GameType } from "../types/game";
 import gameServices from "../services/gameServices";
+import { validateLogin } from "../middlewares/tokenverify";
 
 const router = Router();
 
-router.get("/register", async (req: Request, res: Response) => {
+router.get("/register", validateLogin, async (req: Request, res: Response) => {
     res.send(`<form action="/game/register" method="post">
     <div class="form-group">
         <label for="title">Title:</label>
@@ -38,6 +39,7 @@ router.get("/register", async (req: Request, res: Response) => {
 
 router.post(
     "/register",
+    validateLogin,
     async (req: Request, res: Response, next: NextFunction) => {
         const game: GameType = {
             title: req.body.title,

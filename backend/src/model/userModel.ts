@@ -29,6 +29,7 @@ class User extends Model {
     declare googleId: string | null;
     declare provider: string | null;
     declare secret: string;
+    declare securityState: string;
 
     public async comparePassword(enteredPassword: string): Promise<boolean> {
         return await bcrypt.compare(enteredPassword, this.password);
@@ -90,6 +91,10 @@ User.init(
         secret: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        securityState: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
     },
     {

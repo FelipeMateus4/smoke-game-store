@@ -6,10 +6,9 @@ import passport from "../utils/passportoptions";
 import { UserModel } from "../model/userModel";
 import { ensureAuthenticated } from "../middlewares/protectedRoute";
 import { passportGoogle } from "../utils/passportoauth2";
-import { authenticateToken } from "../utils/tokengen";
 import speakeasy from "speakeasy";
 import { UserType } from "../types/user";
-import { where } from "sequelize";
+import { validateLogin } from "../middlewares/tokenverify";
 
 config();
 
@@ -25,6 +24,7 @@ router.post(
             email: req.body.email,
             verified: false,
             secret: secret.base32,
+            securityState: "none",
         };
 
         //const userValidation = UserType.safeParse(user);
@@ -124,6 +124,7 @@ router.get(
 router.get(
     "/profile",
     ensureAuthenticated,
+    validateLogin,
     async (req: Request, res: Response, next: NextFunction) => {
         // Verifica se req.user está definido e se tem a propriedade username
         if (!req.user || !("username" in req.user)) {
@@ -208,6 +209,16 @@ router.post(
 );
 
 router.post("/logout", function (req, res, next) {
+    const user: any = req.user;
+    if (user.verified) {
+        UserModel.update(
+            { verified: false }, // Os atributos que você quer atualizar
+            {
+                where: { email: user.email }, // A condição para encontrar o usuário
+            }
+        );
+    }
+
     req.logout(function (err) {
         if (err) {
             return next(err);
@@ -222,6 +233,7 @@ router.post("/verify", ensureAuthenticated, async (req, res) => {
     if (!user) {
         res.send("aabababa");
     }
+
     const secret: string = user.secret;
     const verified = speakeasy.totp.verify({
         secret: secret,
@@ -231,6 +243,13 @@ router.post("/verify", ensureAuthenticated, async (req, res) => {
     });
 
     if (verified) {
+        UserModel.update(
+            { verified: true }, // Os atributos que você quer atualizar
+            {
+                where: { email: user.email }, // A condição para encontrar o usuário
+            }
+        );
+
         res.redirect("/account/profile");
     } else {
         return res
@@ -238,7 +257,16 @@ router.post("/verify", ensureAuthenticated, async (req, res) => {
             .send({ message: "Código de verificação inválido ou expirado" });
     }
 });
-router.get("/verify", (req: Request, res: Response) => {
+router.get("/verify", ensureAuthenticated, (req: Request, res: Response) => {
+    const user: any = req.user;
+
+    if (
+        user.securityState === "none" ||
+        user.securityState === "google-security" ||
+        user.verified
+    ) {
+        return res.redirect("/account/profile");
+    }
     res.send(`<!-- views/verify.ejs -->
 <!DOCTYPE html>
 <html>
