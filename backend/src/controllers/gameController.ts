@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from "express";
 import { GameType } from "../types/game";
 import gameServices from "../services/gameServices";
 import { validateLogin } from "../middlewares/tokenverify";
+import { ensureAuthenticated } from "../middlewares/protectedRoute";
 
 const router = Router();
 
@@ -77,6 +78,26 @@ router.delete(
 
         try {
             const result = await gameServices.deleteGame(title);
+            res.status(200).send({
+                message: result,
+                game: title,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+);
+
+// rota para atualizar 1 ou mais campos do game
+router.patch(
+    "/edit",
+    validateLogin,
+    async (req: Request, res: Response, next: NextFunction) => {
+        const title = req.body.title;
+        const update = req.body.update;
+
+        try {
+            const result = await gameServices.updateGame(title, update);
             res.status(200).send({
                 message: result,
                 game: title,

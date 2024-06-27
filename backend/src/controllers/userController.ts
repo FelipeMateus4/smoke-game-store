@@ -74,6 +74,24 @@ router.get(
     }
 );
 
+router.delete(
+    "/delete",
+    ensureAuthenticated,
+    validateLogin,
+    async (req: Request, res: Response, next: NextFunction) => {
+        const user: any = req.user;
+        try {
+            const result = await userService.deleteUser(user.email);
+            res.status(200).send({
+                message: result,
+                user: user.username,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
 router.get(
     "/login",
     async (req: Request, res: Response, next: NextFunction) => {

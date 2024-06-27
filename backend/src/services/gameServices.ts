@@ -19,4 +19,13 @@ const deleteGame = async (title: string) => {
     }
 };
 
-export default { createGame, deleteGame };
+const updateGame = async (title: string, update: any) => {
+    try {
+        const result = await gameRepository.updateGame(title, update);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export default { createGame, deleteGame, updateGame };

@@ -20,10 +20,17 @@ passport.use(
                     message: "Incorrect username or password.",
                 });
             }
-            const token = authenticateToken(user.secret);
 
-            console.log(token);
-            //sendTokenEmailLogin(user.email, token);
+            if (
+                user.securityState !== "none" &&
+                user.securityState !== "google-security" &&
+                !user.allowsession
+            ) {
+                const token = authenticateToken(user.secret);
+                console.log(token);
+                sendTokenEmailLogin(user.email, token);
+            }
+
             return done(null, user);
         } catch (error) {
             return done(error);

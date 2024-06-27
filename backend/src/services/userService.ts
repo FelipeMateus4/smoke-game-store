@@ -14,6 +14,15 @@ const createUser = async (user: UserType) => {
     }
 };
 
+const deleteUser = async (email: string) => {
+    try {
+        const result = await userRepository.deleteUser(email);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+
 const findByEmail = async (email: string) => {
     try {
         const result = await userRepository.findEmail(email);
@@ -23,4 +32,4 @@ const findByEmail = async (email: string) => {
     }
 };
 
-export default { createUser, findByEmail };
+export default { createUser, deleteUser, findByEmail };

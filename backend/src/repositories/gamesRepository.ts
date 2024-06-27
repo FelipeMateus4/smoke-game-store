@@ -23,4 +23,16 @@ const deleteGame = async (title: string) => {
     }
 };
 
-export default { register, deleteGame };
+const updateGame = async (title: string, update: any) => {
+    try {
+        const result = await GameModel.update(update, { where: { title } });
+        if (result[0] === 0) {
+            throw new Error("Game not found!");
+        }
+        return "Game updated successfully!";
+    } catch (error) {
+        throw error;
+    }
+};
+
+export default { register, deleteGame, updateGame };
