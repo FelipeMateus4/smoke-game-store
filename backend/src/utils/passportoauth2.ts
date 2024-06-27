@@ -8,12 +8,12 @@ config();
 passport.use(
     new GoogleStrategy(
         {
-            clientID:
-                "764439856764-b3s3dtd6vqt9mqlj8nbbefeentpje6qi.apps.googleusercontent.com",
-            clientSecret: "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",
+            clientID: process.env.GOOGLE_CLIENT_ID || "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
             callbackURL: "http://localhost:3000/account/auth/google/callback",
         },
         async (accessToken, refreshToken, profile, done) => {
+            await UserModel.sync();
             try {
                 let user = await UserModel.findOne({
                     where: { googleId: profile.id },
@@ -27,6 +27,7 @@ passport.use(
                         provider: "google",
                         verified: true,
                         securityState: "google-security",
+                        allowsession: true,
                     });
                 }
 

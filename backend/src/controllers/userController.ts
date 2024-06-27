@@ -209,55 +209,70 @@ router.post(
     })
 );
 
-router.post("/logout", function (req, res, next) {
-    const user: any = req.user;
-    if (user.allowsession) {
-        UserModel.update(
-            { allowsession: false }, // Os atributos que você quer atualizar
-            {
-                where: { email: user.email }, // A condição para encontrar o usuário
+router.post(
+    "/logout",
+    function (req: Request, res: Response, next: NextFunction) {
+        try {
+            const user: any = req.user;
+            if (user.allowsession) {
+                UserModel.update(
+                    { allowsession: false }, // Os atributos que você quer atualizar
+                    {
+                        where: { email: user.email }, // A condição para encontrar o usuário
+                    }
+                );
             }
-        );
-    }
 
-    req.logout(function (err) {
-        if (err) {
-            return next(err);
+            req.logout(function (err) {
+                if (err) {
+                    return next(err);
+                }
+                return res.redirect("/account/login");
+            });
+        } catch (error) {
+            next(error);
         }
-        return res.redirect("/account/login");
-    });
-});
-
-router.post("/verify", ensureAuthenticated, async (req, res) => {
-    const { code } = req.body;
-    const user: any = req.user;
-    if (!user) {
-        res.send("aabababa");
     }
+);
 
-    const secret: string = user.secret;
-    const verified = speakeasy.totp.verify({
-        secret: secret,
-        encoding: "base32",
-        token: code,
-        window: 2, // Permite uma janela de 1 intervalo (por exemplo, 30 segundos) para contornar pequenos atrasos
-    });
+router.post(
+    "/verify",
+    ensureAuthenticated,
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { code } = req.body;
+        const user: any = req.user;
+        if (!user) {
+            res.send("aabababa");
+        }
 
-    if (verified) {
-        UserModel.update(
-            { allowsession: true }, // Os atributos que você quer atualizar
-            {
-                where: { email: user.email }, // A condição para encontrar o usuário
+        const secret: string = user.secret;
+        const verified = speakeasy.totp.verify({
+            secret: secret,
+            encoding: "base32",
+            token: code,
+            window: 2, // Permite uma janela de 1 intervalo (por exemplo, 30 segundos) para contornar pequenos atrasos
+        });
+
+        try {
+            if (verified) {
+                UserModel.update(
+                    { allowsession: true }, // Os atributos que você quer atualizar
+                    {
+                        where: { email: user.email }, // A condição para encontrar o usuário
+                    }
+                );
+
+                res.redirect("/account/profile");
+            } else {
+                return res.status(401).send({
+                    message: "Código de verificação inválido ou expirado",
+                });
             }
-        );
-
-        res.redirect("/account/profile");
-    } else {
-        return res
-            .status(401)
-            .send({ message: "Código de verificação inválido ou expirado" });
+        } catch (error) {
+            next(error);
+        }
     }
-});
+);
 router.get("/verify", ensureAuthenticated, (req: Request, res: Response) => {
     const user: any = req.user;
 

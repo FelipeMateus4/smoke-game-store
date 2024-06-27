@@ -13,7 +13,7 @@ const createUser = async (user: UserType) => {
 
 const findEmail = async (email: string) => {
     try {
-        const operationResult: any = await UserModel.findOne({
+        const operationResult = await UserModel.findOne({
             where: { email: email },
         });
         if (!operationResult) {
