@@ -11,16 +11,19 @@ passport.use(
                 where: { username: username },
             });
             if (!user) {
-                return done(null, false, { message: "Incorrect username." });
+                return done(null, false, {
+                    message: "Incorrect username or password.",
+                });
             }
             if (!(await user.comparePassword(password))) {
-                return done(null, false, { message: "Incorrect password." });
+                return done(null, false, {
+                    message: "Incorrect username or password.",
+                });
             }
             const token = authenticateToken(user.secret);
 
             console.log(token);
             //sendTokenEmailLogin(user.email, token);
-            console.log(user.securityState);
             return done(null, user);
         } catch (error) {
             return done(error);

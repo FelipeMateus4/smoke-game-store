@@ -4,7 +4,7 @@ import { UserType } from "../types/user";
 const createUser = async (user: UserType) => {
     try {
         await UserModel.sync();
-        console.log(await UserModel.create(user));
+        await UserModel.create(user);
         return user;
     } catch (error) {
         throw error;
