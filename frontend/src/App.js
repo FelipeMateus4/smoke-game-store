@@ -4,7 +4,7 @@ import Cabecalho from "./components/topheader";
 
 function App() {
     return (
-        <div class="app">
+        <div>
             <Cabecalho />
         </div>
     );
