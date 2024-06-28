@@ -24,8 +24,8 @@ const errorHandler = (
         });
     } else if (err instanceof ValidationError) {
         return res.status(400).send({
-            message: "Validation error",
-            error: err.errors.map((err: any) => err.message).join(", "),
+            error: "Validation error",
+            message: err.errors.map((err: any) => err.message).join(", "),
         });
     } else if (err instanceof jwt.JsonWebTokenError) {
         if (err.message === "jwt expired") {

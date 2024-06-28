@@ -9,6 +9,7 @@ import { passportGoogle } from "../utils/passportoauth2";
 import speakeasy from "speakeasy";
 import { UserType } from "../types/user";
 import { validateLogin } from "../middlewares/tokenverify";
+import { ValidationError } from "sequelize";
 
 config();
 
@@ -218,14 +219,26 @@ router.get(
     }
 );
 
-router.post(
-    "/login",
-    passport.authenticate("local", {
-        successRedirect: "/account/verify",
-        failureRedirect: "/account/login",
-        failureFlash: true,
-    })
-);
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err: any, user: any, info: any) => {
+        if (err) return next(err);
+        if (!user) {
+            // Retorna um JSON com a URL de redirecionamento para falha
+            return res.status(401).json({
+                redirectUrl: "/account/login",
+                message: info.message,
+            });
+        }
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            // Retorna um JSON com a URL de redirecionamento para sucesso
+            return res.status(200).json({
+                redirectUrl: "/account/verify",
+                user: user,
+            });
+        });
+    })(req, res, next);
+});
 
 router.post(
     "/logout",
@@ -260,7 +273,7 @@ router.post(
         const { code } = req.body;
         const user: any = req.user;
         if (!user) {
-            res.send("aabababa");
+            res.send("User not found!");
         }
 
         const secret: string = user.secret;
@@ -280,7 +293,9 @@ router.post(
                     }
                 );
 
-                res.redirect("/account/profile");
+                return res
+                    .status(200)
+                    .json({ redirectUrl: "/account/profile" });
             } else {
                 return res.status(401).send({
                     message: "Código de verificação inválido ou expirado",

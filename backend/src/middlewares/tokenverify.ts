@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { UserModel } from "../model/userModel";
 
 const validateLogin = (req: Request, res: Response, next: NextFunction) => {
     const user: any = req.user;
     if (!user) {
-        return res.redirect("/account/login");
+        return res.status(401).redirect("/account/login");
     }
     if (
         user.securityState === "none" ||
@@ -13,7 +12,7 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
     ) {
         return next();
     }
-    return res.redirect("/account/login");
+    return res.status(401).redirect("/account/login");
 };
 
 export { validateLogin };

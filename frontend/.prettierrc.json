@@ -6,13 +6,13 @@
   "printWidth": 120,
   "overrides": [
     {
-      "files": ["*.json", "*.config.js"],
+      "files": [".json", ".config.js"],
       "options": {
         "tabWidth": 2
       }
     },
     {
-      "files": ["*.html"],
+      "files": [".html"],
       "options": {
         "tabWidth": 4,
         "printWidth": 80,
@@ -20,7 +20,7 @@
       }
     },
     {
-      "files": ["*.css", "*.scss"],
+      "files": [".css", "*.scss"],
       "options": {
         "tabWidth": 4,
         "printWidth": 80,

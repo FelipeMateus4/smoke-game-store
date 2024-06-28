@@ -1,12 +1,12 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Cabecalho from "./components/topheader";
+// src/App.js
+import React from "react";
+import { Outlet } from "react-router";
 
 function App() {
     return (
-        <div>
-            <Cabecalho />
-        </div>
+        <>
+            <Outlet />
+        </>
     );
 }
 

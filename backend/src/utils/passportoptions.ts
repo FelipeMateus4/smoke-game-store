@@ -6,6 +6,7 @@ import { authenticateToken } from "./tokengen";
 
 passport.use(
     new LocalStrategy(async (username, password, done) => {
+        console.log("Local Strategy");
         try {
             const user = await UserModel.findOne({
                 where: { username: username },
