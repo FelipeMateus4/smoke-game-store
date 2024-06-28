@@ -1,0 +1,8 @@
+.container-custom {
+    background-color: #333; /* Cor de fundo da linha de cabeçalho */
+    color: white; /* Cor do texto */
+    height: 80px; /* Altura da linha de cabeçalho */
+    display: flex; /* Usado para centralizar o conteúdo */
+    align-items: center; /* Alinha o conteúdo verticalmente ao centro */
+    justify-content: center; /* Alinha o conteúdo horizontalmente ao centro */
+}
