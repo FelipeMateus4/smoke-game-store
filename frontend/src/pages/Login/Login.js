@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { axios } from "../../axiosConfig";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
+axios.defaults.withCredentials = true; // Garante que cookies sejam enviados com cada requisição
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -29,8 +32,11 @@ const Login = () => {
                 navigate(redirectUrl);
             }
         } catch (error) {
-            setError(error.response.data);
-            console.log(error.response.data); // Mensagem de erro para exibir no frontend
+            if (error.response.data.message === "Missing credentials") {
+                error.response.data.message = "Os campos de usuário e senha são obrigatórios.";
+                setError(error.response.data); // Mensagem de erro para exibir no frontend
+            }
+            setError(error.response.data); // Mensagem de erro para exibir no frontend
         }
     };
 
@@ -40,12 +46,16 @@ const Login = () => {
             {error && <p>{error.message}</p>} {/* Exibe mensagem de erro se houver */}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username</label>
+                    <label>Usuário:</label>
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div>
-                    <label>Password</label>
+                    <label>Senha:</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div>
+                    <label>Não possui uma conta?</label>
+                    <a href="/account/login">Registre-se</a>
                 </div>
                 <button type="submit">Login</button>
             </form>

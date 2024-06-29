@@ -61,7 +61,7 @@ function Cabecalho() {
                     </nav>
                 </div>
                 <div className="nav-links">
-                    <Link to="/account/register" className="text-custom">
+                    <Link to="/account/login" className="text-custom">
                         <FontAwesomeIcon icon={faUser} className="icon-spacing" />
                         Entrar
                     </Link>

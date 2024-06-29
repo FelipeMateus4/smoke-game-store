@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { axios } from "../../axiosConfig";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { axios } from "../../axiosConfig";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
+axios.defaults.withCredentials = true; // Garante que cookies sejam enviados com cada requisição
 
 const Verify = () => {
     const [code, setCode] = useState("");

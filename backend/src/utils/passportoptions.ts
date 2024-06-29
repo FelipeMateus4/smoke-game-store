@@ -13,12 +13,12 @@ passport.use(
             });
             if (!user) {
                 return done(null, false, {
-                    message: "Incorrect username or password.",
+                    message: "Usuário ou senha incorretos.",
                 });
             }
             if (!(await user.comparePassword(password))) {
                 return done(null, false, {
-                    message: "Incorrect username or password.",
+                    message: "Usuário ou senha incorretos.",
                 });
             }
 

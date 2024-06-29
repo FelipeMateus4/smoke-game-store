@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { axios } from "../../axiosConfig";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -34,19 +36,23 @@ const Register = () => {
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username</label>
+                    <label>Usuário</label>
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div>
-                    <label>Password</label>
+                    <label>Senha:</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div>
-                    <label>Email</label>
+                    <label>Email:</label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
+                <div>
+                    <label>Já possui uma conta?</label>
+                    <a href="/account/login">Login</a>
+                </div>
                 <button type="submit">Register</button>
-                {error && <p style={{ color: "red" }}>{error}</p>} {/* Exibir mensagem de erro */}
+                {error && <p style={{ color: "black" }}>{error}</p>} {/* Exibir mensagem de erro */}
             </form>
         </div>
     );
