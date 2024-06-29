@@ -1,8 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.page-custom-background {
+    background-color: #2e2e2e; /* Cor de fundo desejada para esta página */
+    min-height: 100vh; /* Garante que o fundo cubra a altura total da tela */
+    display: flex;
+    flex-direction: column;
+}
 .container-custom {
-    background-color: #333; /* Cor de fundo da linha de cabeçalho */
+    background-color: #201e1e; /* Cor de fundo da linha de cabeçalho */
     color: white; /* Cor do texto */
     height: 80px; /* Altura da linha de cabeçalho */
     display: flex; /* Usado para centralizar o conteúdo */
     align-items: center; /* Alinha o conteúdo verticalmente ao centro */
-    justify-content: center; /* Alinha o conteúdo horizontalmente ao centro */
+}
+.custom-logo {
+    width: 50px; /* Largura do logo */
+    height: 50px; /* Altura do logo */
+    margin: 0;
+    padding: 0;
+    margin-left: 0;
+    display: block;
+    float: left; /* Alinha a imagem à esquerda */
+    max-width: 150px; /* Ajuste o tamanho conforme necessário */
+}
+
+.text-custom {
+    font-size: 1.5em; /* Tamanho da fonte */
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    color: white;
+    font-size: xx-large;
+    text-decoration: none; /* Remove a sublinhado dos links */
+    background-color: #201e1e;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-links {
+    margin-left: auto; /* Empurra os links para a extrema direita */
+    margin-bottom: 15px;
+}
+
+.text-custom:hover {
+    color: #d43838; /* Cor de fundo ao passar o mouse */
 }

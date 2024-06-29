@@ -1,14 +1,14 @@
 // src/pages/Home.js
 import React from "react";
 import { Link } from "react-router-dom";
+import Cabecalho from "../../components/topheader";
 
 const Home = () => {
     return (
         <div>
-            <h1>Bem-vindo ao Smoke Game Store</h1>
-            <p>
-                <Link to="/account/register">Registrar</Link> | <Link to="/account/login">Login</Link>
-            </p>
+            <Cabecalho>
+                <p></p>
+            </Cabecalho>
         </div>
     );
 };
