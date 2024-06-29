@@ -15,14 +15,14 @@ const Login = () => {
                 username,
                 password,
             });
-            localStorage.setItem("token", response.data.token);
 
             if (response.status === 200) {
                 const redirectUrl = response.data.redirectUrl;
-                navigate(redirectUrl);
                 const user = response.data.user;
-                if (user.securityState !== "none" && user.securityState !== "google-security" && !user.allowsession) {
+                if (user.securityState === "none" || user.securityState === "google-security" || user.allowsession) {
                     navigate("/account/profile");
+                } else {
+                    navigate(redirectUrl);
                 }
             } else if (response.status === 401) {
                 const redirectUrl = response.data.redirectUrl;
