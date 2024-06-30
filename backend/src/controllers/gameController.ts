@@ -6,38 +6,6 @@ import { ensureAuthenticated } from "../middlewares/protectedRoute";
 
 const router = Router();
 
-router.get("/register", validateLogin, async (req: Request, res: Response) => {
-    res.send(`<form action="/game/register" method="post">
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-    </div>
-    <div class="form-group">
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required step="0.01" min="0">
-    </div>
-    <div class="form-group">
-        <label for="tags">Tags (comma separated):</label>
-        <input type="text" id="tags" name="tags" required>
-    </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
-    </div>
-    <div class="form-group">
-        <label for="platform">Platform (comma separated):</label>
-        <input type="text" id="platform" name="platform" required>
-    </div>
-    <div class="form-group">
-        <label for="url">URL:</label>
-        <input type="url" id="url" name="url">
-    </div>
-    <div class="form-group">
-        <button type="submit">Register Game</button>
-    </div>
-</form>`);
-});
-
 router.post(
     "/register",
     validateLogin,

@@ -28,7 +28,7 @@ const Footer = () => {
                 <div className="footer-section">
                     <h4>Siga a Smoke</h4>
                     <ul className="social-media">
-                        <a href="/account/register" className="text-decoration-none ml-2">
+                        <a href="/account/verify/resend" className="text-decoration-none ml-2">
                             Facebook
                         </a>
 
