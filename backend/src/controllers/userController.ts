@@ -217,13 +217,14 @@ router.get(
                         where: { email: user.email }, // A condição para encontrar o usuário
                     }
                 );
+                return res.status(200);
+            } else {
                 return res
-                    .status(200)
-                    .json({ redirectUrl: "/account/profile" });
+                    .status(401)
+                    .send({
+                        message: "Código de verificação não pode ser enviado",
+                    });
             }
-            return res.status(401).send({
-                message: "Código de verificação inválido ou expirado",
-            });
         } catch (error) {
             next(error);
         }
