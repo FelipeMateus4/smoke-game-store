@@ -1,15 +1,15 @@
 // src/pages/Home.js
 import React from "react";
 import { Link } from "react-router-dom";
-import Cabecalho from "../../components/TopHeader/topheader";
 import Header from "../../components/HeaderMain/Header";
+import Footer from "../../components/footer/Footer";
 
 const Home = () => {
     return (
         <div>
-            <Header>
-                <p></p>
-            </Header>
+            <Header />
+            <Footer />
+            <p></p>
         </div>
     );
 };
