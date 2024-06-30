@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Cabecalho from "../../components/TopHeader/topheader";
 import Header from "../../components/HeaderMain/Header";
 import "./Login.css";
 
