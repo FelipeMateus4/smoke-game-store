@@ -4,6 +4,8 @@
     background-color: #2f3c68; /* Cor de fundo escura */
     width: 100%; /* Largura total */
     position: relative; /* Necessário para o posicionamento do gradiente */
+    justify-content: center;
+    height: 100%; /* Altura da barra de navegação */
 }
 
 .navbar-custom::after {
@@ -34,6 +36,7 @@
 
 .mr-auto {
     margin-left: 20px; /* Margem à direita automática */
+    justify-content: center;
 }
 
 .ml-auto {

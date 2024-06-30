@@ -11,8 +11,8 @@ const Footer = () => {
                     <ul>
                         <li>Sobre</li>
                         <li>Carreiras</li>
-                        <li>Seu jogo na Nuuvem</li>
-                        <li>Nuuvem Co-op</li>
+                        <li>Seu jogo na Smoke</li>
+                        <li>Smoke Co-op</li>
                         <li>Segurança</li>
                     </ul>
                 </div>
@@ -22,15 +22,20 @@ const Footer = () => {
                         <li>Suporte</li>
                         <li>Termos de Uso</li>
                         <li>Política de Privacidade</li>
-                        <li>Procon-RJ</li>
+                        <li>Procon-Mg</li>
                     </ul>
                 </div>
                 <div className="footer-section">
-                    <h4>Siga a Nuuvem</h4>
+                    <h4>Siga a Smoke</h4>
                     <ul className="social-media">
-                        <li>Facebook</li>
+                        <a href="/account/register" className="text-decoration-none ml-2">
+                            Facebook
+                        </a>
+
                         <li>Twitter</li>
-                        <li>Instagram</li>
+                        <a href="https://www.instagram.com/felipeneto/?hl=pt-br" className="text-decoration-none ml-2">
+                            instagram
+                        </a>
                         <li>YouTube</li>
                         <li>Discord</li>
                     </ul>

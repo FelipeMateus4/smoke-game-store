@@ -1,0 +1,59 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.verify-page {
+    flex: 1;
+    background: linear-gradient(120deg, #2b6185, #0d0b64);
+    background-size: 200% 200%;
+    animation: gradientBG 9s linear infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.verify-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 200px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Borda semi-transparente */
+    border-radius: 15px; /* Bordas mais arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais suave */
+    backdrop-filter: blur(30px); /* Efeito de desfoque no fundo */
+}
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.footer-custom {
+    width: 100%; /* Certifica que o footer ocupa toda a largura */
+    margin-top: 147px; /* Empurra o footer para o final da página */
+}
+
+.cooltext {
+    font-size: xx-large;
+    color: #000000;
+    font-family: cursive;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.custom-alert {
+}

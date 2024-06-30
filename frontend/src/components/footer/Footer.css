@@ -4,13 +4,16 @@
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
+    width: 100%;
+    flex: auto;
+    min-height: auto;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 2200px;
     margin: 0 auto;
 }
 
