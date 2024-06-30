@@ -1,14 +1,15 @@
 // src/pages/Home.js
 import React from "react";
 import { Link } from "react-router-dom";
-import Cabecalho from "../../components/topheader";
+import Cabecalho from "../../components/TopHeader/topheader";
+import Header from "../../components/HeaderMain/Header";
 
 const Home = () => {
     return (
         <div>
-            <Cabecalho>
+            <Header>
                 <p></p>
-            </Cabecalho>
+            </Header>
         </div>
     );
 };

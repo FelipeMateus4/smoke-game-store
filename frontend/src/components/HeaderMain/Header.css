@@ -1,0 +1,71 @@
+/* Header.css */
+
+.navbar-custom {
+    background-color: #2f3c68; /* Cor de fundo escura */
+    width: 100%; /* Largura total */
+    position: relative; /* Necessário para o posicionamento do gradiente */
+}
+
+.navbar-custom::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Espessura da borda inferior */
+    background-image: linear-gradient(to right, #01a0f58c, #9d00f8); /* Gradiente da borda inferior */
+    background-size: 200% 2px; /* Tamanho do gradiente igual à largura da barra */
+    animation: animateGradient 9s linear infinite; /* Animação do gradiente */
+}
+
+@keyframes animateGradient {
+    0% {
+        background-position: 100% 0; /* Início do gradiente à direita */
+    }
+    100% {
+        background-position: -100% 0; /* Final do gradiente à esquerda */
+    }
+}
+
+.brand-text {
+    color: #ffffff; /* Cor do texto para o nome da loja */
+    font-weight: bold; /* Texto em negrito */
+}
+
+.mr-auto {
+    margin-left: 20px; /* Margem à direita automática */
+}
+
+.ml-auto {
+    margin-right: 20px; /* Margem à esquerda automática */
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff; /* Cor do texto dos links */
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #f8f9fa; /* Cor do texto dos links ao passar o mouse */
+}
+
+.dropdown-menu {
+    background-color: #343a40; /* Cor de fundo do menu suspenso */
+    border: 1px solid #0066cc;
+    border-image: linear-gradient(to right, #01a0f58c, #9d00f8) 1; /* Borda do menu suspenso */
+}
+
+.dropdown-item {
+    color: #ffffff; /* Cor do texto dos itens do menu suspenso */
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #23272b; /* Cor de fundo ao passar o mouse nos itens do menu */
+    border: 1px solid #0066cc;
+    color: #ffffff; /* Cor do texto ao passar o mouse nos itens do menu */
+}
+
+.navbar-nav.ml-auto {
+    margin-left: 122px !important; /* Define a margem esquerda automática apenas para o ml-auto */
+}

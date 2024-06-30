@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Topheader.css";
-import logoImg from "../assets/da.jpg";
+import logoImg from "../../assets/da.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faGamepad, faInfoCircle, faHeadset, faUser } from "@fortawesome/free-solid-svg-icons";
