@@ -196,38 +196,28 @@ router.get(
 router.get(
     "/verify/resend",
     ensureAuthenticated,
-    (req: Request, res: Response, next: NextFunction) => {
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user: any = req.user;
             if (!user) {
-                res.send("User not found!");
+                console.log("User not found!");
+                return res.status(404).send("User not found!");
             }
+
             const token = authenticateToken(user.secret);
-            console.log(token);
-            sendTokenEmailLogin(user.email, token);
-            const secret: string = user.secret;
-            const verify = speakeasy.totp({
-                secret: secret,
-                encoding: "base32",
-            });
-            if (verify) {
-                UserModel.update(
-                    { allowsession: true }, // Os atributos que você quer atualizar
-                    {
-                        where: { email: user.email }, // A condição para encontrar o usuário
-                    }
-                );
-                return res.status(200);
-            } else {
-                return res
-                    .status(401)
-                    .send({
-                        message: "Código de verificação não pode ser enviado",
-                    });
-            }
+            console.log(`Generated token: ${token}`);
+
+            // Simulate sending email for demonstration purposes
+            const emailSent = sendTokenEmailLogin(user.email, token);
+
+            return res
+                .status(200)
+                .send({ message: "Código reenviado com sucesso" });
         } catch (error) {
+            console.error("Error in resend route:", error);
             next(error);
         }
     }
 );
+
 export { router as userRouter };
