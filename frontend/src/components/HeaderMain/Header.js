@@ -45,7 +45,7 @@ const Header = () => {
                     </Nav.Link>
                 </Nav>
                 <Nav>
-                    <Nav.Link as={Link} to="/entrar">
+                    <Nav.Link as={Link} to="/account/login">
                         <FontAwesomeIcon icon={faUser} className="fa-icon" /> Entrar
                     </Nav.Link>
                 </Nav>

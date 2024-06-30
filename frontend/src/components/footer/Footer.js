@@ -41,7 +41,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className="footer-bottom">&copy; 2011 - 2024 Nuuvem Ltda. Todos os direitos reservados.</div>
+            <div className="footer-bottom">&copy; 1988 - 2024 Smoke Ltda. Todos os direitos reservados.</div>
         </footer>
     );
 };

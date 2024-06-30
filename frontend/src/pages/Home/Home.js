@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/HeaderMain/Header";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
     return (
