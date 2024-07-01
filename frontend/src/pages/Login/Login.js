@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/HeaderMain/Header";
 import "./Login.css";
+import Footer from "../../components/Footer/Footer";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 axios.defaults.withCredentials = true; // Garante que cookies sejam enviados com cada requisição
@@ -70,6 +71,7 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

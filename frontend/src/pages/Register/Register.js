@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/HeaderMain/Header";
-import "./Register.css"; // Importe o arquivo CSS específico para Register
+import "./Register.css";
+import Footer from "../../components/Footer/Footer";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 
@@ -63,6 +64,7 @@ const Register = () => {
                     </button>
                 </form>
             </div>
+            <Footer />
         </div>
     );
 };

@@ -36,6 +36,7 @@
     border-radius: 15px; /* Bordas mais arredondadas */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais suave */
     backdrop-filter: blur(30px); /* Efeito de desfoque no fundo */
+    margin-bottom: 60px;
 }
 
 .login-form {
