@@ -1,8 +1,79 @@
+/* src/pages/Home.css */
 .home-background {
-    background-image: url("../../assets/lindo.jpg"); /* Altere para o caminho correto da sua imagem */
-    background-size: cover; /* Ajusta a imagem para cobrir todo o espaço */
-    background-repeat: no-repeat; /* Impede que a imagem se repita */
-    background-position: center; /* Centraliza a imagem */
-    height: 100vh; /* Define a altura da página para ocupar a tela inteira */
-    display: flex; /* Permite que os elementos filhos sejam alinhados horizontalmente */
+    background-image: url("../../assets/lindo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.welcome-section {
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    color: white;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.featured-products {
+    margin-bottom: 40px;
+}
+
+.product-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.product-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.about-section {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
 }
