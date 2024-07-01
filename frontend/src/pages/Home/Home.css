@@ -1,0 +1,8 @@
+.home-background {
+    background-image: url("../../assets/lindo.jpg"); /* Altere para o caminho correto da sua imagem */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o espaço */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-position: center; /* Centraliza a imagem */
+    height: 100vh; /* Define a altura da página para ocupar a tela inteira */
+    display: flex; /* Permite que os elementos filhos sejam alinhados horizontalmente */
+}
