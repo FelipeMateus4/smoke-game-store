@@ -64,7 +64,7 @@ const Login = () => {
                                 Registre-se
                             </a>
                         </div>
-                        <button type="submit" className="btn btn-primary w-100 mt-3">
+                        <button id="submit-buttom-custom-login" type="submit" className="btn btn-primary w-100 mt-3">
                             Login
                         </button>
                     </form>

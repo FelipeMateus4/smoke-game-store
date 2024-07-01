@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Register.css";
 import Header from "../../components/HeaderMain/Header";
+import "./Register.css"; // Importe o arquivo CSS específico para Register
 
 axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 
@@ -38,6 +38,7 @@ const Register = () => {
             <Header />
             <div className="register-container">
                 <h1>Register</h1>
+                {error && <p style={{ color: "black" }}>{error}</p>}
                 <form className="register-form" onSubmit={handleSubmit}>
                     <div>
                         <label>Usuário</label>
@@ -51,12 +52,15 @@ const Register = () => {
                         <label>Email:</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
-                    <div>
-                        <label>Já possui uma conta?</label>
-                        <a href="/account/login">Login</a>
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                        <span>Já possui uma conta?</span>
+                        <a href="/account/login" className="text-decoration-none ml-2">
+                            Login
+                        </a>
                     </div>
-                    <button type="submit">Register</button>
-                    {error && <p style={{ color: "black" }}>{error}</p>} {/* Exibir mensagem de erro */}
+                    <button id="submit-buttom-custom-register" type="submit" className="btn btn-primary w-100 mt-3">
+                        Register
+                    </button>
                 </form>
             </div>
         </div>

@@ -1,38 +1,14 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-}
 .verify-page {
-    flex: 1;
     background: linear-gradient(120deg, #2b6185, #0d0b64);
     background-size: 200% 200%;
     animation: gradientBG 9s linear infinite;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
 }
-.verify-container {
-    display: flex;
-    flex-basis: auto;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-    min-width: 100px;
-    max-height: 400px;
-    margin-top: 200px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Borda semi-transparente */
-    border-radius: 15px; /* Bordas mais arredondadas */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra mais suave */
-    backdrop-filter: blur(30px); /* Efeito de desfoque no fundo */
-}
+
 @keyframes gradientBG {
     0% {
         background-position: 0% 50%;
@@ -44,91 +20,71 @@ body {
         background-position: 0% 50%;
     }
 }
-.footer-custom {
-    width: 100%; /* Certifica que o footer ocupa toda a largura */
-    margin-top: 147px; /* Empurra o footer para o final da página */
+
+.verify-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 200px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(30px);
 }
 
-.cooltext {
-    font-size: xx-large;
-    color: #000000;
-    font-family: cursive;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    font-size: xx-large;
+.verify-form {
+    width: 100%;
+    margin-top: 20px;
 }
 
-.a-flex {
-    margin-top: 10px;
-    margin-right: 110px;
+.verify-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-.timer-text-custom {
-    font-size: 40px;
-    color: #000000;
-    font-family: cursive;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
+.verify-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
-.highlight {
-    font-weight: bold;
-    color: red;
-    font-size: 1.5em; /* Exemplo: aumenta o tamanho da fonte baseado no tamanho da fonte pai */
-}
-.verification-designe {
-    font-size: 1.3em;
-    font-weight: bold;
-    padding-right: 5px;
-}
-#submit-buttom-custom-verify {
+
+.verify-form .custom-button {
     background: linear-gradient(120deg, #32bce6, #221fb3);
     background-size: 200% 200%;
     border-color: rgb(0, 0, 0);
     box-shadow: #000000;
     width: 80%;
-    margin: 20px auto;
+    margin: auto 0%;
     display: block;
     text-align: center;
     padding: 10px;
-    max-width: 200px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra à borda do botão */
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#submit-buttom-custom-verify:hover {
-    animation: gradientBG2 4s linear infinite; /* Correção na animação */
-}
-#submit-buttom-custom-verify:active {
-    transform: scale(0.95); /* Reduz ligeiramente o botão para efeito de clique */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajusta a sombra ao clicar */
-}
-@keyframes gradientBG2 {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+.verify-form .custom-button:hover {
+    animation: gradientBG2 4s linear infinite;
 }
 
-@media (max-width: 600px) {
-    .verify-container {
-        padding: 10px;
-        min-width: none;
-    }
+.verify-form .custom-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-    .timer-text-custom {
-        font-size: 1.5em;
-    }
+.timer-text {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
 
-    button {
-        max-width: 150px;
-        min-width: none;
-        border-radius: 5px;
-    }
+.cooltext {
+    font-size: 2.5rem;
+    margin-top: 30px;
 }
