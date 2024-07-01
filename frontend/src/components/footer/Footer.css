@@ -1,12 +1,12 @@
 /* Footer.css */
+
 .footer {
-    background-color: #2c2f33;
+    background-color: #020612;
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
     width: 100%;
-    flex: auto;
-    min-height: auto;
+    margin-top: auto;
 }
 
 .footer-content {

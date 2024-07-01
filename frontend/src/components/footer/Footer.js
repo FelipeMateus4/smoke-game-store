@@ -1,6 +1,5 @@
-// Footer.js
 import React from "react";
-import "./Footer.css"; // Importa o arquivo CSS para estilização
+import "./Footer.css";
 
 const Footer = () => {
     return (
@@ -28,14 +27,20 @@ const Footer = () => {
                 <div className="footer-section">
                     <h4>Siga a Smoke</h4>
                     <ul className="social-media">
-                        <a href="/account/verify/resend" className="text-decoration-none ml-2">
-                            Facebook
-                        </a>
-
+                        <li>
+                            <a href="/account/verify/resend" className="text-decoration-none ml-2">
+                                Facebook
+                            </a>
+                        </li>
                         <li>Twitter</li>
-                        <a href="https://www.instagram.com/felipeneto/?hl=pt-br" className="text-decoration-none ml-2">
-                            instagram
-                        </a>
+                        <li>
+                            <a
+                                href="https://www.instagram.com/felipeneto/?hl=pt-br"
+                                className="text-decoration-none ml-2"
+                            >
+                                Instagram
+                            </a>
+                        </li>
                         <li>YouTube</li>
                         <li>Discord</li>
                     </ul>

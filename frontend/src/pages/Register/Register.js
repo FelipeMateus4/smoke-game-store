@@ -5,13 +5,13 @@ import Header from "../../components/HeaderMain/Header";
 import "./Register.css";
 import Footer from "../../components/Footer/Footer";
 
-axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
+axios.defaults.baseURL = "http://localhost:5000";
 
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [error, setError] = useState(null); // Estado para armazenar o erro
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -38,7 +38,7 @@ const Register = () => {
         <div className="register-page">
             <Header />
             <div className="register-container">
-                <h1>Register</h1>
+                <h1>REGISTRAR</h1>
                 {error && <p style={{ color: "black" }}>{error}</p>}
                 <form className="register-form" onSubmit={handleSubmit}>
                     <div>
