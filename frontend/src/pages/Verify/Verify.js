@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/HeaderMain/Header";
 import "./Verify.css";
 import Footer from "../../components/Footer/Footer";
+
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
 
