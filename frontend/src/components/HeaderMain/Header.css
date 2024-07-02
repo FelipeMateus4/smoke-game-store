@@ -1,10 +1,22 @@
 .navbar-custom {
-    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    background: linear-gradient(45deg, #0400ff, #2575fc);
     padding: 10px 20px;
-    border: 1px solid #2575fc;
+    border-bottom: 3px solid #2575fc;
     width: 100%;
+    animation: fadeBorder 3s infinite alternate; /* Adicione esta linha */
 }
 
+@keyframes fadeBorder {
+    0% {
+        border-bottom-color: #25adfc;
+    }
+    50% {
+        border-bottom-color: #0400ff; /* Cor dourada intermediária */
+    }
+    100% {
+        border-bottom-color: #4e0fe0;
+    }
+}
 .navbar-custom .navbar-brand img {
     border-radius: 50%;
 }
@@ -27,11 +39,11 @@
 }
 
 .navbar-custom .nav-link:hover {
-    color: #ffd700 !important; /* Golden color on hover */
+    color: #e0a3f8 !important;
 }
 
 .navbar-custom .nav-item .nav-dropdown-item:hover {
-    background-color: #ffd700 !important; /* Golden background on hover */
+    background-color: #e0a3f8 !important;
 }
 
 .navbar-custom .nav-link .fa-icon {
@@ -48,4 +60,15 @@
 
 .navbar-custom .dropdown-item:hover {
     background-color: #2575fc !important;
+    border: 2px solid #25adfc !important;
+}
+
+.navbar-custom .navbar-toggler {
+    border-color: transparent;
+    background-color: transparent; /* Torna o fundo transparente */
+    color: white;
+}
+
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
