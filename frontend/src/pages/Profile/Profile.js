@@ -28,7 +28,7 @@ const Profile = () => {
         <div className="profile">
             <Header />
             <div className="profile-container">
-                <h1 className="header-profile">Profile</h1>
+                <h1 className="header-profile">PERFIL</h1>
                 <div className="profile-place-img">
                     <img
                         src="https://istoe.com.br/wp-content/uploads/2023/08/felipe-neto.jpg?x56617"
@@ -38,21 +38,31 @@ const Profile = () => {
                 </div>
                 <div>
                     {userData ? (
-                        <>
+                        <div className="profile-input-section">
                             <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
-                                <p className="text-profile">Username: {userData.username}</p>
+                                <p className="text-profile">
+                                    <span className="bold-text">Usuário:</span>
+                                    {userData.username}
+                                </p>
                             </div>
                             <div className="profile-Email">
                                 <FontAwesomeIcon icon={faEnvelope} className="Email-icon" />
-                                <p className="text-profile2">Email: {userData.email}</p>
+                                <p className="text-profile2">
+                                    <span className="bold-text">Email:</span>
+                                    {userData.email}
+                                </p>
                             </div>
-                        </>
+                        </div>
                     ) : (
                         <p>Loading...</p>
                     )}
                 </div>
-                <button type="button" className=" btn btn-primary button-edit button-profile button-editor">
+                <button
+                    id="submit-buttom-custom-editprofile"
+                    type="button"
+                    className=" btn btn-primary button-edit button-profile button-editor"
+                >
                     Editar
                 </button>
             </div>
