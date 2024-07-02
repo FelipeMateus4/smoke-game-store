@@ -5,7 +5,6 @@ import Header from "../../components/HeaderMain/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/Footer/Footer";
-import "bootstrap/dist/css/bootstrap.css";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 
@@ -53,7 +52,7 @@ const Profile = () => {
                         <p>Loading...</p>
                     )}
                 </div>
-                <button type="button" className="btn btn-primary button-edit buttom-profile">
+                <button type="button" className=" btn btn-primary button-edit button-profile button-editor">
                     Editar
                 </button>
             </div>
