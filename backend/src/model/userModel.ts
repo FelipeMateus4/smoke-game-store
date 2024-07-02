@@ -25,6 +25,11 @@ class User extends Model {
     declare username: string;
     declare password: string;
     declare email: string;
+    declare cpf: string | null;
+    declare nome: string | null;
+    declare sobrenome: string | null;
+    declare telefone: string | null;
+    declare dataNascimento: Date | null;
     declare verified: boolean;
     declare googleId: string | null;
     declare provider: string | null;
@@ -73,6 +78,46 @@ User.init(
             validate: {
                 isEmail: {
                     msg: "O email deve ser válido",
+                },
+            },
+        },
+        cpf: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true,
+            validate: {
+                is: {
+                    args: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+                    msg: "O CPF deve ser válido",
+                },
+            },
+        },
+        nome: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        sobrenome: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        telefone: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true,
+            validate: {
+                is: {
+                    args: /^\(\d{2}\) \d{4,5}-\d{4}$/,
+                    msg: "O telefone deve ser válido",
+                },
+            },
+        },
+        dataNascimento: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            validate: {
+                isDate: {
+                    args: true,
+                    msg: "A data de nascimento deve ser válida",
                 },
             },
         },
