@@ -41,4 +41,16 @@ const findEmail = async (email: string) => {
         throw error;
     }
 };
-export default { createUser, deleteUser, findEmail };
+
+const getUSer = async (username: string) => {
+    try {
+        const user = await UserModel.findOne({ where: { username: username } });
+        if (!user) {
+            throw new Error("User not found");
+        }
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
+export default { createUser, deleteUser, findEmail, getUSer };

@@ -31,5 +31,13 @@ const findByEmail = async (email: string) => {
         throw error;
     }
 };
+const getUser = async (username: string) => {
+    try {
+        const user = await userRepository.getUSer(username);
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
 
-export default { createUser, deleteUser, findByEmail };
+export default { createUser, deleteUser, findByEmail, getUser };

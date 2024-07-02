@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import userService from "../services/userService";
-import jwt from "jsonwebtoken";
+import jwt, { verify } from "jsonwebtoken";
 import { config } from "dotenv";
 import passport from "../utils/passportoptions";
 import { UserModel } from "../model/userModel";
@@ -207,7 +207,6 @@ router.get(
             const token = authenticateToken(user.secret);
             console.log(`Generated token: ${token}`);
 
-            // Simulate sending email for demonstration purposes
             const emailSent = sendTokenEmailLogin(user.email, token);
 
             return res
@@ -220,4 +219,23 @@ router.get(
     }
 );
 
+router.get(
+    "/profile",
+    ensureAuthenticated,
+    validateLogin,
+    async (req, res, next: NextFunction) => {
+        const user: any = req.user;
+
+        if (!user) {
+            res.send("User not found!");
+        }
+
+        try {
+            const Resultuser = await userService.getUser(user.username);
+            res.status(200).send({ user: Resultuser });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
 export { router as userRouter };
