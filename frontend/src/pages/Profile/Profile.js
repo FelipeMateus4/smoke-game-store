@@ -1,32 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./Profile.css";
 import Header from "../../components/HeaderMain/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/Footer/Footer";
+import { AuthContext } from "../../context/AuthContext";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 
 const Profile = () => {
+    const { user } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get("/account/profile");
-                setUserData(response.data.user);
+                // Simulando a recuperação de dados do usuário do contexto
+                setUserData(user);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
         };
 
-        fetchUserData();
-    }, []);
+        if (user) {
+            fetchUserData();
+        }
+    }, [user]);
 
     return (
         <div className="profile">
-            <Header />
             <div className="profile-container">
                 <h1 className="header-profile">PERFIL</h1>
                 <div className="profile-place-img">

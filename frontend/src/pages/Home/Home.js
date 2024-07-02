@@ -40,7 +40,6 @@ const Home = () => {
 
     return (
         <div className="home-background">
-            <Header />
             <main className="content">
                 <section className="welcome-section">
                     <h1>Bem-vindo à Smoke Game Store</h1>

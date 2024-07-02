@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/HeaderMain/Header";
 import "./Login.css";
 import Footer from "../../components/Footer/Footer";
+import { AuthContext } from "../../context/AuthContext";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Defina a URL base do backend
 axios.defaults.withCredentials = true; // Garante que cookies sejam enviados com cada requisição
-
 const Login = () => {
+    const { login } = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
@@ -25,6 +26,7 @@ const Login = () => {
             if (response.status === 200) {
                 const redirectUrl = response.data.redirectUrl;
                 const user = response.data.user;
+                login(user);
                 if (user.securityState === "none" || user.securityState === "google-security" || user.allowsession) {
                     navigate("/account/profile");
                 } else {
@@ -45,7 +47,6 @@ const Login = () => {
 
     return (
         <div className="login-page">
-            <Header />
             <div className="container d-flex justify-content-center align-items-center login-container">
                 <div className="w-100">
                     <h1 className="text-center mb-4">LOGIN</h1>

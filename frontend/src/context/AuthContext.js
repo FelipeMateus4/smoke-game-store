@@ -1,65 +1,29 @@
-// AuthContext.js
-import React, { createContext, useState, useContext, useEffect } from "react";
-import axios from "axios";
+import React, { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
 
-  const login = async (username, password) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/account/login",
-        { username, password },
-        { withCredentials: true }
-      );
-      setUser(response.data.user);
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  };
+    useEffect(() => {
+        // Aqui você pode implementar a lógica para verificar o estado de autenticação do usuário
+        const storedUser = sessionStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
 
-  const logout = async () => {
-    await axios.post(
-      "http://localhost:5000/account/logout",
-      {},
-      { withCredentials: true }
-    );
-    setUser(null);
-    setIsAuthenticated(false);
-  };
+    const login = (userData) => {
+        setUser(userData);
+        sessionStorage.setItem("user", JSON.stringify(userData));
+    };
 
-  const checkAuthStatus = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/account/profile",
-        { withCredentials: true }
-      );
-      setUser(response.data.user);
-      setIsAuthenticated(true);
-    } catch (error) {
-      setIsAuthenticated(false);
-    }
-  };
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem("user");
+    };
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+export { AuthContext, AuthProvider };
