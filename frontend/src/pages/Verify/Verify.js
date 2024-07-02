@@ -54,7 +54,6 @@ const Verify = () => {
 
     return (
         <div className="verify-page">
-            <Header />
             <div className="container d-flex justify-content-center align-items-center verify-container">
                 <div className="w-100">
                     <h1 className="text-center cooltext">Verificação</h1>

@@ -36,7 +36,6 @@ const Register = () => {
 
     return (
         <div className="register-page">
-            <Header />
             <div className="register-container">
                 <h1>REGISTRAR</h1>
                 {error && <p style={{ color: "black" }}>{error}</p>}
