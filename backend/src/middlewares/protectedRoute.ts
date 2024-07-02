@@ -6,6 +6,6 @@ function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
         return next();
     }
     console.log(req.isAuthenticated());
-    return res.status(401).redirect("/account/login");
+    return res.status(401).send({ message: "Usuario não logado" });
 }
 export { ensureAuthenticated };
