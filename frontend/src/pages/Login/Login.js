@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/HeaderMain/Header";
 import "./Login.css";
 import Footer from "../../components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";

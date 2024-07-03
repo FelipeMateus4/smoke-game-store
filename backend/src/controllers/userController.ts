@@ -118,15 +118,13 @@ router.post("/login", (req, res, next) => {
 
 router.post(
     "/logout",
-    function (req: Request, res: Response, next: NextFunction) {
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user: any = req.user;
-            if (user.allowsession) {
-                UserModel.update(
-                    { allowsession: false }, // Os atributos que você quer atualizar
-                    {
-                        where: { email: user.email }, // A condição para encontrar o usuário
-                    }
+            if (user && user.allowsession) {
+                await UserModel.update(
+                    { allowsession: false },
+                    { where: { email: user.email } }
                 );
             }
 
@@ -134,7 +132,9 @@ router.post(
                 if (err) {
                     return next(err);
                 }
-                return res.redirect("/account/login");
+                return res
+                    .status(200)
+                    .send({ message: "Usuário deslogado com sucesso" });
             });
         } catch (error) {
             next(error);
