@@ -39,8 +39,8 @@ const Profile = () => {
         try {
             const response = await axios.post("/account/logout");
             if (response.status === 200) {
-                logout(); // Call the logout function from the context
-                navigate("/"); // Use navigate to redirect
+                logout(); // chamada ao contexto de logout
+                navigate("/");
             }
         } catch (error) {
             console.error(error);
