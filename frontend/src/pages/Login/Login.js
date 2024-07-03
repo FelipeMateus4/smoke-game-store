@@ -53,7 +53,12 @@ const Login = () => {
                     <form className="login-form" onSubmit={handleSubmit}>
                         <div>
                             <label>Usuário:</label>
-                            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <input
+                                id="inputpf"
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
                         </div>
                         <div>
                             <label>Senha:</label>

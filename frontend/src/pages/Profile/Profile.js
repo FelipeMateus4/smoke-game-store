@@ -68,9 +68,9 @@ const Profile = () => {
                                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                                 </p>
                             </div>
-                            <div className="profile-Email">
-                                <FontAwesomeIcon icon={faEnvelope} className="Email-icon" />
-                                <p className="text-profile2">
+                            <div className="profile-User">
+                                <FontAwesomeIcon icon={faEnvelope} className="User-icon" />
+                                <p className="text-profile">
                                     <label>Email:</label>
                                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
                                 </p>
