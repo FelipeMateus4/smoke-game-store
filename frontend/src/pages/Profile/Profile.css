@@ -126,3 +126,26 @@
         background-position: 0% 50%;
     }
 }
+
+#submit-buttom-custom-logout {
+    background: linear-gradient(120deg, #ff4a02, #e43f16);
+    background-size: 200% 200%;
+    border-color: rgb(0, 0, 0);
+    box-shadow: #000000;
+    width: 80%;
+    margin: auto 0%;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#submit-buttom-custom-logout:hover {
+    animation: gradientBG2 4s linear infinite;
+}
+
+#submit-buttom-custom-logout:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
