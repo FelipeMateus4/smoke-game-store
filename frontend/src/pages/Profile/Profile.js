@@ -12,20 +12,25 @@ axios.defaults.baseURL = "http://localhost:5000"; // Set the base URL for the ba
 const Profile = () => {
     const { user, logout } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [nome, setNome] = useState("");
+    const [sobrenome, setSobrenome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [telefone, setTelefone] = useState("");
+    const [data, setData] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                // Simulating fetching user data from context
-                setUserData(user);
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-
         if (user) {
-            fetchUserData();
+            setUserData(user);
+            setUsername(user.username);
+            setEmail(user.email);
+            setNome(user.nome || "");
+            setSobrenome(user.sobrenome || "");
+            setCpf(user.cpf || "");
+            setTelefone(user.telefone || "");
+            setData(user.data || "");
         }
     }, [user]);
 
@@ -59,50 +64,54 @@ const Profile = () => {
                             <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
-                                    <span className="bold-text">Usuário:</span>
-                                    {userData.username}
+                                    <label>Usuário:</label>
+                                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                                 </p>
                             </div>
                             <div className="profile-Email">
                                 <FontAwesomeIcon icon={faEnvelope} className="Email-icon" />
                                 <p className="text-profile2">
-                                    <span className="bold-text">Email:</span>
-                                    {userData.email}
+                                    <label>Email:</label>
+                                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
                                 </p>
                             </div>
-                            <div className="profile-Name">
+                            <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
-                                    <span className="bold-text">Nome:</span>
-                                    {userData.nome}
+                                    <label>Nome:</label>
+                                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
                                 </p>
                             </div>
-                            <div className="profile-LastName">
+                            <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
-                                    <span className="bold-text">Sobrenome:</span>
-                                    {userData.sobrenome}
+                                    <label>Sobrenome:</label>
+                                    <input
+                                        type="text"
+                                        value={sobrenome}
+                                        onChange={(e) => setSobrenome(e.target.value)}
+                                    />
                                 </p>
                             </div>
-                            <div className="profile-CPF">
+                            <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
-                                    <span className="bold-text">CPF:</span>
-                                    {userData.cpf}
+                                    <label>CPF:</label>
+                                    <input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
                                 </p>
                             </div>
-                            <div className="profile-Phone">
+                            <div className="profile-User">
                                 <FontAwesomeIcon icon={faPhone} className="User-icon" />
                                 <p className="text-profile">
-                                    <span className="bold-text">Telefone:</span>
-                                    {userData.telefone}
+                                    <label>Telefone:</label>
+                                    <input type="text" value={telefone} onChange={(e) => setTelefone(e.target.value)} />
                                 </p>
                             </div>
-                            <div className="profile-BirthDate">
+                            <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
-                                    <span className="bold-text">Data de Nascimento:</span>
-                                    {userData.dataNascimento}
+                                    <label>Data:</label>
+                                    <input type="text" value={data} onChange={(e) => setData(e.target.value)} />
                                 </p>
                             </div>
                         </div>
@@ -110,21 +119,23 @@ const Profile = () => {
                         <p>Carregando...</p>
                     )}
                 </div>
-                <button
-                    id="submit-buttom-custom-editprofile"
-                    type="button"
-                    className="btn btn-primary button-edit button-profile button-editor"
-                >
-                    Editar
-                </button>
-                <button
-                    id="submit-buttom-custom-logout"
-                    type="button"
-                    className="btn btn-secondary button-logout button-profile button-logout"
-                    onClick={handleLogout}
-                >
-                    Logout
-                </button>
+                <div className="submit-buttoms-profile">
+                    <button
+                        id="submit-buttom-custom-editprofile"
+                        type="button"
+                        className="btn btn-primary button-edit button-profile button-editor"
+                    >
+                        Editar
+                    </button>
+                    <button
+                        id="submit-buttom-custom-logout"
+                        type="button"
+                        className="btn btn-secondary button-logout button-profile button-logout"
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </button>
+                </div>
             </div>
             <Footer />
         </div>

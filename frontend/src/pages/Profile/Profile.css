@@ -13,9 +13,9 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 1000px;
+    width: 900px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
     border: 2px solid rgba(255, 255, 255, 0.3); /* Borda semi-transparente */
@@ -31,6 +31,9 @@
 }
 
 .profile-input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens ao início do contêiner */
     margin-top: 40px;
 }
 
@@ -81,13 +84,14 @@
 }
 
 .profile-User {
+    margin-bottom: 15px;
     display: flex;
     position: relative;
     text-align: center;
 }
 
 .profile-Email {
-    margin-top: 15px;
+    margin-bottom: 15px;
     display: flex;
     position: relative;
     text-align: center;
@@ -148,4 +152,9 @@
 #submit-buttom-custom-logout:active {
     transform: scale(0.95);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.submit-buttoms-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
