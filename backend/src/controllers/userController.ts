@@ -121,7 +121,7 @@ router.post(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user: any = req.user;
-            if (user && user.allowsession) {
+            if (user.allowsession) {
                 await UserModel.update(
                     { allowsession: false },
                     { where: { email: user.email } }

@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Set the base URL for the backend
 
 const Profile = () => {
     const { user, logout } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -33,7 +35,7 @@ const Profile = () => {
             const response = await axios.post("/account/logout");
             if (response.status === 200) {
                 logout(); // Call the logout function from the context
-                window.location.href = "/";
+                navigate("/"); // Use navigate to redirect
             }
         } catch (error) {
             console.error(error);
