@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./Profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -68,22 +68,57 @@ const Profile = () => {
                                     {userData.email}
                                 </p>
                             </div>
+                            <div className="profile-Name">
+                                <FontAwesomeIcon icon={faUser} className="User-icon" />
+                                <p className="text-profile">
+                                    <span className="bold-text">Nome:</span>
+                                    {userData.nome}
+                                </p>
+                            </div>
+                            <div className="profile-LastName">
+                                <FontAwesomeIcon icon={faUser} className="User-icon" />
+                                <p className="text-profile">
+                                    <span className="bold-text">Sobrenome:</span>
+                                    {userData.sobrenome}
+                                </p>
+                            </div>
+                            <div className="profile-CPF">
+                                <FontAwesomeIcon icon={faUser} className="User-icon" />
+                                <p className="text-profile">
+                                    <span className="bold-text">CPF:</span>
+                                    {userData.cpf}
+                                </p>
+                            </div>
+                            <div className="profile-Phone">
+                                <FontAwesomeIcon icon={faPhone} className="User-icon" />
+                                <p className="text-profile">
+                                    <span className="bold-text">Telefone:</span>
+                                    {userData.telefone}
+                                </p>
+                            </div>
+                            <div className="profile-BirthDate">
+                                <FontAwesomeIcon icon={faUser} className="User-icon" />
+                                <p className="text-profile">
+                                    <span className="bold-text">Data de Nascimento:</span>
+                                    {userData.dataNascimento}
+                                </p>
+                            </div>
                         </div>
                     ) : (
-                        <p>Loading...</p>
+                        <p>Carregando...</p>
                     )}
                 </div>
                 <button
                     id="submit-buttom-custom-editprofile"
                     type="button"
-                    className=" btn btn-primary button-edit button-profile button-editor"
+                    className="btn btn-primary button-edit button-profile button-editor"
                 >
                     Editar
                 </button>
                 <button
                     id="submit-buttom-custom-logout"
                     type="button"
-                    className=" btn btn-secondary button-logout button-profile button-logout"
+                    className="btn btn-secondary button-logout button-profile button-logout"
                     onClick={handleLogout}
                 >
                     Logout
