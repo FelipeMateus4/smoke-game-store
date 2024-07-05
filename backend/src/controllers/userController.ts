@@ -219,6 +219,31 @@ router.get(
     }
 );
 
+router.put(
+    "/profile/edit",
+    ensureAuthenticated,
+    validateLogin,
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { username, email, nome, sobrenome, cpf, telefone, data } =
+            req.body;
+        const update = {
+            username,
+            email,
+            nome,
+            sobrenome,
+            cpf,
+            telefone,
+            data,
+        };
+        try {
+            const user = await userService.updateUser(update);
+            return res.status(200).send({ message: "deu certo", user: user });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
 router.get(
     "/profile",
     ensureAuthenticated,

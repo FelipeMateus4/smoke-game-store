@@ -53,4 +53,28 @@ const getUSer = async (username: string) => {
         throw error;
     }
 };
-export default { createUser, deleteUser, findEmail, getUSer };
+
+const updateUser = async (update: any) => {
+    try {
+        const user = await UserModel.findOne({
+            where: { username: update.username },
+        });
+        if (!user) {
+            throw new Error("User not found");
+        }
+        user.username = update.username || user.username;
+        user.email = update.email || user.email;
+        user.nome = update.nome || user.nome;
+        user.sobrenome = update.sobrenome || user.sobrenome;
+        user.cpf = update.cpf || user.cpf;
+        user.telefone = update.telefone || user.telefone;
+        user.dataNascimento = update.data || user.dataNascimento;
+
+        await user.save();
+
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
+export default { createUser, deleteUser, findEmail, getUSer, updateUser };

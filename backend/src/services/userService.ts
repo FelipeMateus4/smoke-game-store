@@ -40,4 +40,12 @@ const getUser = async (username: string) => {
     }
 };
 
-export default { createUser, deleteUser, findByEmail, getUser };
+const updateUser = async (update: any) => {
+    try {
+        const user = await userRepository.updateUser(update);
+        return user;
+    } catch (error) {
+        throw error;
+    }
+};
+export default { createUser, deleteUser, findByEmail, getUser, updateUser };

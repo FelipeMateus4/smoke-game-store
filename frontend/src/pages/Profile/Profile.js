@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 axios.defaults.baseURL = "http://localhost:5000"; // Set the base URL for the backend
 
 const Profile = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout, login } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -44,6 +44,28 @@ const Profile = () => {
             }
         } catch (error) {
             console.error(error);
+        }
+    };
+
+    const handleUpdate = async () => {
+        try {
+            const updatedUser = {
+                username,
+                email,
+                nome,
+                sobrenome,
+                cpf,
+                telefone,
+                data,
+            };
+            const response = await axios.put(`/account/profile/edit`, updatedUser); // Assumindo que o ID do usuário está no user.id
+            if (response.status === 200) {
+                login(response.data.user);
+                alert("Perfil atualizado com sucesso!");
+                // Atualizar os dados do contexto do usuário, se necessário
+            }
+        } catch (error) {
+            console.error("Erro ao atualizar perfil:", error);
         }
     };
 
@@ -124,6 +146,7 @@ const Profile = () => {
                         id="submit-buttom-custom-editprofile"
                         type="button"
                         className="btn btn-primary button-edit button-profile button-editor"
+                        onClick={handleUpdate}
                     >
                         Editar
                     </button>
