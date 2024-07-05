@@ -46,7 +46,7 @@ const Profile = () => {
             console.error(error);
         }
     };
-
+    //d
     const handleUpdate = async () => {
         try {
             const updatedUser = {
