@@ -224,21 +224,13 @@ router.put(
     ensureAuthenticated,
     validateLogin,
     async (req: Request, res: Response, next: NextFunction) => {
-        const { id, username, email, nome, sobrenome, cpf, telefone, data } =
-            req.body;
-        const update = {
-            id,
-            username,
-            email,
-            nome,
-            sobrenome,
-            cpf,
-            telefone,
-            data,
-        };
+        const updates = req.body;
+
         try {
-            const user = await userService.updateUser(update);
-            return res.status(200).send({ message: "deu certo", user: user });
+            const user = await userService.updateUser(updates);
+            return res
+                .status(200)
+                .send({ message: "Perfil atualizado com sucesso", user });
         } catch (error) {
             next(error);
         }

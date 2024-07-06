@@ -40,9 +40,9 @@ const getUser = async (username: string) => {
     }
 };
 //d
-const updateUser = async (update: any) => {
+const updateUser = async (updates: any) => {
     try {
-        const user = await userRepository.updateUser(update);
+        const user = await userRepository.updateUser(updates);
         return user;
     } catch (error) {
         throw error;

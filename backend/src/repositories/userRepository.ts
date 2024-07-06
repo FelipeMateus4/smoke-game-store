@@ -54,19 +54,16 @@ const getUSer = async (username: string) => {
     }
 };
 
-const updateUser = async (update: any) => {
+const updateUser = async (updates: any) => {
     try {
-        const user = await UserModel.findByPk(update.id);
+        const user: any = await UserModel.findByPk(updates.id);
         if (!user) {
             throw new Error("User not found");
         }
-        user.username = update.username || user.username;
-        user.email = update.email || user.email;
-        user.nome = update.nome || user.nome;
-        user.sobrenome = update.sobrenome || user.sobrenome;
-        user.cpf = update.cpf || user.cpf;
-        user.telefone = update.telefone || user.telefone;
-        user.dataNascimento = update.data || user.dataNascimento;
+
+        Object.keys(updates).forEach((key) => {
+            user[key] = updates[key] !== undefined ? updates[key] : user[key];
+        });
 
         await user.save();
 

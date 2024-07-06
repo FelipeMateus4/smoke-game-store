@@ -18,7 +18,7 @@ const Profile = () => {
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
     const [telefone, setTelefone] = useState("");
-    const [data, setData] = useState("");
+    const [dataNascimento, setDataNascimento] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const Profile = () => {
             setSobrenome(user.sobrenome || "");
             setCpf(user.cpf || "");
             setTelefone(user.telefone || "");
-            setData(user.data || "");
+            setDataNascimento(user.dataNascimento || "");
         }
     }, [user]);
 
@@ -50,16 +50,19 @@ const Profile = () => {
     const handleUpdate = async () => {
         try {
             const id = user.id;
-            const updatedUser = {
-                id,
-                username,
-                email,
-                nome,
-                sobrenome,
-                cpf,
-                telefone,
-                data,
-            };
+            const updatedUser = {};
+
+            updatedUser.id = id;
+            if (username !== user.username) updatedUser.username = username;
+            if (email !== user.email && email !== "") updatedUser.email = email;
+            if (nome !== user.nome && nome !== "") updatedUser.nome = nome;
+            if (sobrenome !== user.sobrenome && sobrenome !== "") updatedUser.sobrenome = sobrenome;
+            if (cpf !== user.cpf && cpf !== "") updatedUser.cpf = cpf;
+            if (telefone !== user.telefone && telefone !== "") updatedUser.telefone = telefone;
+            if (dataNascimento !== user.dataNascimento && dataNascimento !== "")
+                updatedUser.dataNascimento = dataNascimento;
+            console.log(updatedUser);
+
             const response = await axios.put(`/account/profile/edit`, updatedUser); // Assumindo que o ID do usuário está no user.id
             if (response.status === 200) {
                 login(response.data.user);
@@ -135,7 +138,11 @@ const Profile = () => {
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
                                     <label>Data:</label>
-                                    <input type="text" value={data} onChange={(e) => setData(e.target.value)} />
+                                    <input
+                                        type="text"
+                                        value={dataNascimento}
+                                        onChange={(e) => setDataNascimento(e.target.value)}
+                                    />
                                 </p>
                             </div>
                         </div>
