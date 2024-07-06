@@ -224,9 +224,10 @@ router.put(
     ensureAuthenticated,
     validateLogin,
     async (req: Request, res: Response, next: NextFunction) => {
-        const { username, email, nome, sobrenome, cpf, telefone, data } =
+        const { id, username, email, nome, sobrenome, cpf, telefone, data } =
             req.body;
         const update = {
+            id,
             username,
             email,
             nome,

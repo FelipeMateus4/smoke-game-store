@@ -56,9 +56,7 @@ const getUSer = async (username: string) => {
 
 const updateUser = async (update: any) => {
     try {
-        const user = await UserModel.findOne({
-            where: { username: update.username },
-        });
+        const user = await UserModel.findByPk(update.id);
         if (!user) {
             throw new Error("User not found");
         }

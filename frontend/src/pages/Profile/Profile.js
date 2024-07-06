@@ -49,7 +49,9 @@ const Profile = () => {
     //d
     const handleUpdate = async () => {
         try {
+            const id = user.id;
             const updatedUser = {
+                id,
                 username,
                 email,
                 nome,
@@ -65,7 +67,7 @@ const Profile = () => {
                 // Atualizar os dados do contexto do usuário, se necessário
             }
         } catch (error) {
-            console.error("Erro ao atualizar perfil:", error);
+            alert(error.response.data.message || "Erro ao atualizar perfil");
         }
     };
 
