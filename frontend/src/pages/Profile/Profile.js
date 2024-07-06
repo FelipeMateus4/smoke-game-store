@@ -6,6 +6,7 @@ import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import InputMask from "react-input-mask";
 
 axios.defaults.baseURL = "http://localhost:5000"; // Set the base URL for the backend
 
@@ -124,14 +125,26 @@ const Profile = () => {
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
                                     <label>CPF:</label>
-                                    <input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
+                                    <InputMask
+                                        mask="999.999.999-99"
+                                        value={cpf}
+                                        onChange={(e) => setCpf(e.target.value)}
+                                    >
+                                        {(inputProps) => <input {...inputProps} type="text" />}
+                                    </InputMask>
                                 </p>
                             </div>
                             <div className="profile-User">
                                 <FontAwesomeIcon icon={faPhone} className="User-icon" />
                                 <p className="text-profile">
                                     <label>Telefone:</label>
-                                    <input type="text" value={telefone} onChange={(e) => setTelefone(e.target.value)} />
+                                    <InputMask
+                                        mask="(99) 99999-9999"
+                                        value={telefone}
+                                        onChange={(e) => setTelefone(e.target.value)}
+                                    >
+                                        {(inputProps) => <input {...inputProps} type="text" />}
+                                    </InputMask>
                                 </p>
                             </div>
                             <div className="profile-User">
