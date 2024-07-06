@@ -112,7 +112,7 @@ User.init(
             },
         },
         dataNascimento: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: true,
             validate: {
                 isDate: {
