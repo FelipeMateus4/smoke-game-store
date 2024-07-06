@@ -7,6 +7,9 @@ import Footer from "../../components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns"; // Importe a função format de date-fns
 
 axios.defaults.baseURL = "http://localhost:5000"; // Set the base URL for the backend
 
@@ -150,11 +153,23 @@ const Profile = () => {
                             <div className="profile-User">
                                 <FontAwesomeIcon icon={faUser} className="User-icon" />
                                 <p className="text-profile">
-                                    <label>Data:</label>
-                                    <input
-                                        type="text"
-                                        value={dataNascimento}
-                                        onChange={(e) => setDataNascimento(e.target.value)}
+                                    <label>Data de Nascimento:</label>
+                                    <DatePicker
+                                        selected={dataNascimento}
+                                        onChange={(date) => setDataNascimento(date)}
+                                        dateFormat="dd/MM/yyyy"
+                                        className="form-control"
+                                        customInput={
+                                            <InputMask
+                                                mask="99/99/9999"
+                                                value={dataNascimento ? format(dataNascimento, "dd/MM/yyyy") : ""}
+                                                onChange={(e) => setDataNascimento(e.target.value)}
+                                            >
+                                                {(inputProps) => (
+                                                    <input {...inputProps} type="text" className="form-control" />
+                                                )}
+                                            </InputMask>
+                                        }
                                     />
                                 </p>
                             </div>

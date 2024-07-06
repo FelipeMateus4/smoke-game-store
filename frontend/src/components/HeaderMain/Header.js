@@ -67,7 +67,7 @@ const Header = () => {
                 <Nav>
                     {user ? (
                         <Nav.Link as={Link} onClick={handleLogout}>
-                            <FontAwesomeIcon icon={faUser} className="fa-icon" /> logout
+                            <FontAwesomeIcon icon={faUser} className="fa-icon" /> Logout
                         </Nav.Link>
                     ) : (
                         <Nav.Link as={Link} to="/account/login">
