@@ -23,9 +23,20 @@ const Profile = () => {
     const [cpf, setCpf] = useState("");
     const [telefone, setTelefone] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (error) {
+            if (error.message === "Usuario não logado!") {
+                logout();
+                navigate("/account/login");
+            } else if (error.error === "Cannot read properties of undefined (reading 'allowsession')") {
+                logout();
+                navigate("/account/login");
+            }
+        }
+
         if (user) {
             setUserData(user);
             setUsername(user.username);
@@ -36,7 +47,7 @@ const Profile = () => {
             setTelefone(user.telefone || "");
             setDataNascimento(user.dataNascimento || "");
         }
-    }, [user]);
+    }, [user, error, logout, navigate]);
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -47,6 +58,8 @@ const Profile = () => {
                 navigate("/");
             }
         } catch (error) {
+            console.log(error.response.data);
+            setError(error.response.data);
             console.error(error);
         }
     };
@@ -74,6 +87,8 @@ const Profile = () => {
                 // Atualizar os dados do contexto do usuário, se necessário
             }
         } catch (error) {
+            console.log(error.response.data);
+            setError(error.response.data);
             alert(error.response.data.message || "Erro ao atualizar perfil");
         }
     };
